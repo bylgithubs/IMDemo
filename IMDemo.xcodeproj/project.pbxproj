@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		640ABDF524405A710048A44B /* AddressDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 640ABDF424405A710048A44B /* AddressDataModel.m */; };
 		640AE8ED2440164C00349FBC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 640AE8EC2440164C00349FBC /* AppDelegate.m */; };
 		640AE8F32440164C00349FBC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 640AE8F12440164C00349FBC /* Main.storyboard */; };
 		640AE8F52440164D00349FBC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 640AE8F42440164D00349FBC /* Assets.xcassets */; };
@@ -21,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		640ABDF324405A710048A44B /* AddressDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressDataModel.h; sourceTree = "<group>"; };
+		640ABDF424405A710048A44B /* AddressDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressDataModel.m; sourceTree = "<group>"; };
 		640AE8E82440164C00349FBC /* IMDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IMDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		640AE8EB2440164C00349FBC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		640AE8EC2440164C00349FBC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -64,6 +67,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		640ABDF224405A3C0048A44B /* AddressModel */ = {
+			isa = PBXGroup;
+			children = (
+				640ABDF324405A710048A44B /* AddressDataModel.h */,
+				640ABDF424405A710048A44B /* AddressDataModel.m */,
+			);
+			path = AddressModel;
+			sourceTree = "<group>";
+		};
 		640AE8DF2440164C00349FBC = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +115,7 @@
 		640AE9012440179100349FBC /* Address */ = {
 			isa = PBXGroup;
 			children = (
+				640ABDF224405A3C0048A44B /* AddressModel */,
 				640AE90F244025BB00349FBC /* AddressCell */,
 				640AE9062440187200349FBC /* AddressViewController.h */,
 				640AE9072440187200349FBC /* AddressViewController.m */,
@@ -259,6 +272,7 @@
 				640AE9152440265E00349FBC /* SuperAddressCell.m in Sources */,
 				640AE9082440187200349FBC /* AddressViewController.m in Sources */,
 				640AE8ED2440164C00349FBC /* AppDelegate.m in Sources */,
+				640ABDF524405A710048A44B /* AddressDataModel.m in Sources */,
 				640AE9052440184D00349FBC /* ChatRecordViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -13,6 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface AddressTextCell : SuperAddressCell
 
+@property (nonatomic,strong) NSMutableDictionary *dataDic;
+@property (nonatomic,strong) NSMutableArray *dataArr;
+
 - (void)setCellStyle;
 
 @end

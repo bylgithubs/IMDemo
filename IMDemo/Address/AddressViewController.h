@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AddressCell/AddressTextCell.h"
 #import <Contacts/Contacts.h>
+#import "AddressModel/AddressDataModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

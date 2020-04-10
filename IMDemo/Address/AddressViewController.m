@@ -12,18 +12,21 @@
 
 @property (nonnull,strong) UITableView *tableView;
 @property (nonnull,strong) NSMutableDictionary *dataDic;
+@property (nonnull,strong) NSMutableArray *dataArr;
+
 
 @end
 
 @implementation AddressViewController
 
 @synthesize tableView;
-@synthesize dataDic;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.dataDic = [[NSMutableDictionary alloc] init];
+    self.dataArr = [[NSMutableArray alloc] init];
     tableView = [[UITableView alloc] initWithFrame:self.view.frame];
     tableView.delegate = self;
     tableView.dataSource =self;
@@ -37,7 +40,8 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 25;
+    NSLog(@"=========%@",self.dataArr);
+    return self.dataArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -46,7 +50,12 @@
     if (addrCell == nil) {
         addrCell = [[AddressTextCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
+    NSLog(@"=========%@",self.dataDic);
+    NSLog(@"=========%@",self.dataArr);
+    addrCell.dataDic = self.dataDic;
+    addrCell.dataArr = self.dataArr;
     [addrCell setCellStyle];
+    addrCell.textLabel.text = self.dataArr[indexPath.row];
     return addrCell;
     
 }
@@ -104,33 +113,58 @@
     [contactStore enumerateContactsWithFetchRequest:fetchRequest error:nil usingBlock:^(CNContact * _Nonnull contact, BOOL * _Nonnull stop) {
         NSLog(@"-------------------------------------------------------");
         
+        AddressDataModel *model = [[AddressDataModel alloc] init];
+        
         NSString *givenName = contact.givenName;
         NSString *familyName = contact.familyName;
         NSLog(@"givenName=%@, familyName=%@", givenName, familyName);
         //拼接姓名
-        NSString *nameStr = [NSString stringWithFormat:@"%@%@",contact.familyName,contact.givenName];
+        model.name = [NSString stringWithFormat:@"%@%@",contact.familyName,contact.givenName];
         
         NSArray *phoneNumbers = contact.phoneNumbers;
         for (CNLabeledValue *labelValue in phoneNumbers) {
             //遍历一个人名下的多个电话号码
-            NSString *label = labelValue.label;
+            NSString *phoneType = labelValue.label;
             //   NSString *    phoneNumber = labelValue.value;
             CNPhoneNumber *phoneNumber = labelValue.value;
             
-            NSString * string = phoneNumber.stringValue ;
+            NSString *number = phoneNumber.stringValue ;
             
             //去掉电话中的特殊字符
-            string = [string stringByReplacingOccurrencesOfString:@"+86" withString:@""];
-            string = [string stringByReplacingOccurrencesOfString:@"-" withString:@""];
-            string = [string stringByReplacingOccurrencesOfString:@"(" withString:@""];
-            string = [string stringByReplacingOccurrencesOfString:@")" withString:@""];
-            string = [string stringByReplacingOccurrencesOfString:@" " withString:@""];
-            string = [string stringByReplacingOccurrencesOfString:@" " withString:@""];
+            number = [number stringByReplacingOccurrencesOfString:@"+86" withString:@""];
+            number = [number stringByReplacingOccurrencesOfString:@"-" withString:@""];
+            number = [number stringByReplacingOccurrencesOfString:@"(" withString:@""];
+            number = [number stringByReplacingOccurrencesOfString:@")" withString:@""];
+            number = [number stringByReplacingOccurrencesOfString:@" " withString:@""];
+            number = [number stringByReplacingOccurrencesOfString:@" " withString:@""];
             
-            NSLog(@"姓名=%@, 电话号码是=%@", nameStr, string);
-   
+            NSLog(@"姓名=%@, 电话号码是=%@", model.name, number);
+        
+            if ([phoneType containsString:@"Home"]) {
+                model.homePhone = number;
+            }
+            else if([phoneType containsString:@"Work"]){
+                model.workPhone = number;
+            }
+            else if([phoneType containsString:@"iPhone"]){
+                model.iPhonePhone = number;
+            }
+            else if([phoneType containsString:@"Mobile"]){
+                model.mobilePhone = number;
+            }
+            else if([phoneType containsString:@"Main"]){
+                model.mainPhone = number;
+            }
+                            
+        }
+        [self.dataDic setObject:model forKey:model.name];
+        if (model.name!=nil) {
+            [self.dataArr addObject:model.name];
+        } else {
+            [self.dataArr addObject:model.homePhone];
         }
         
+        NSLog(@"=========%@",self.dataArr);
         //    *stop = YES; // 停止循环，相当于break；
         
     }];
