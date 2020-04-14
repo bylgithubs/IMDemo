@@ -15,6 +15,8 @@
 @property (nonatomic,strong) NSMutableDictionary *dataDic;
 @property (nonatomic,strong) NSMutableArray *dataArr;
 @property (nonatomic,strong) AddressSegmentView *segmentView;
+@property (nonatomic,strong) NSIndexPath *ClickCellIndex;
+@property (nonatomic,assign) BOOL sideSwitch;
 
 
 @end
@@ -33,7 +35,8 @@
     tableView.delegate = self;
     tableView.dataSource =self;
     [self.view addSubview:tableView];
-    
+    self.ClickCellIndex = nil;
+    self.sideSwitch = false;
     
     [self initUI];
     [self initData];
@@ -61,25 +64,35 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *cellIdentifier = @"AddressIdentifier";
-    AddressTextCell *addrCell = (AddressTextCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    AddressTableViewCell *addrCell = (AddressTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (addrCell == nil) {
-        addrCell = [[AddressTextCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        addrCell = [[AddressTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     NSLog(@"=========%@",self.dataDic);
     NSLog(@"=========%@",self.dataArr);
     addrCell.dataDic = self.dataDic;
     addrCell.dataArr = self.dataArr;
     [addrCell setCellStyle];
-    addrCell.textLabel.text = self.dataArr[indexPath.row];
+    if (self.ClickCellIndex.section == indexPath.section && self.ClickCellIndex.row == indexPath.row && self.sideSwitch) {
+        [addrCell addAddressSideView];
+    }
+    addrCell.nameLabel.text = self.dataArr[indexPath.row];
     return addrCell;
     
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSLog(@"section======%ld,row======%ld",indexPath.section,indexPath.row);
     
+    self.sideSwitch = !self.sideSwitch;
+    self.ClickCellIndex = indexPath;
+    [tableView reloadData];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (self.ClickCellIndex.section == indexPath.section && self.ClickCellIndex.row == indexPath.row && self.sideSwitch) {
+        return 100;
+    }
     return 66;
 }
 

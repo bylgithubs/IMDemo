@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AddressCell/AddressTextCell.h"
+#import "AddressCell/AddressTableViewCell.h"
 #import <Contacts/Contacts.h>
 #import "AddressModel/AddressDataModel.h"
 

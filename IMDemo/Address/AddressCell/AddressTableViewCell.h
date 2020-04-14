@@ -1,22 +1,25 @@
 //
-//  AddressTextCell.h
+//  AddressTableViewCell.h
 //  IMDemo
 //
-//  Created by Civet on 2020/4/10.
+//  Created by Civet on 2020/4/14.
 //  Copyright © 2020 PersonalONBYL. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "SuperAddressCell.h"
+#import "AddressSideView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AddressTextCell : SuperAddressCell
+@interface AddressTableViewCell : SuperAddressCell
 
 @property (nonatomic,strong) NSMutableDictionary *dataDic;
 @property (nonatomic,strong) NSMutableArray *dataArr;
+@property (nonatomic,strong) UILabel *nameLabel;
+@property (nonatomic,strong) AddressSideView *sideView;
 
 - (void)setCellStyle;
+- (void)addAddressSideView;
 
 @end
 

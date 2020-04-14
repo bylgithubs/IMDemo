@@ -1,14 +1,13 @@
 //
-//  AddressTextCell.m
+//  AddressTableViewCell.m
 //  IMDemo
 //
-//  Created by Civet on 2020/4/10.
+//  Created by Civet on 2020/4/14.
 //  Copyright © 2020 PersonalONBYL. All rights reserved.
 //
+#import "AddressTableViewCell.h"
 
-#import "AddressTextCell.h"
-
-@implementation AddressTextCell
+@implementation AddressTableViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -21,12 +20,23 @@
 
 - (void)setCellStyle{
     [super setCellStyle];
+    [self initUI];
+}
+
+- (void)initUI{
+    self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 10, 100, 30)];
+    [self addSubview:self.nameLabel];
+}
+
+- (void)addAddressSideView{
+    CGRect frame = self.frame;
+    self.sideView = [[AddressSideView alloc] initWithFrame:CGRectMake(frame.origin.x, frame.size.height/2, frame.size.width, frame.size.height/2)];
+    [self addSubview:self.sideView];
 }
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    self.backgroundColor = [UIColor grayColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
