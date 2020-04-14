@@ -7,12 +7,14 @@
 //
 
 #import "AddressViewController.h"
+#import "AddressSegmentView.h"
 
-@interface AddressViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface AddressViewController ()<UITableViewDelegate,UITableViewDataSource,SegmentViewDelegate>
 
-@property (nonnull,strong) UITableView *tableView;
-@property (nonnull,strong) NSMutableDictionary *dataDic;
-@property (nonnull,strong) NSMutableArray *dataArr;
+@property (nonatomic,strong) UITableView *tableView;
+@property (nonatomic,strong) NSMutableDictionary *dataDic;
+@property (nonatomic,strong) NSMutableArray *dataArr;
+@property (nonatomic,strong) AddressSegmentView *segmentView;
 
 
 @end
@@ -31,8 +33,21 @@
     tableView.delegate = self;
     tableView.dataSource =self;
     [self.view addSubview:tableView];
-    [self requestContactAuthorAfterSystemVersion9];
+    
+    
+    [self initUI];
+    [self initData];
+}
 
+- (void)initUI{
+    self.segmentView = [[AddressSegmentView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2 - 75, (44 - 30)/2, 150, 30)];
+    self.navigationItem.titleView = self.segmentView;
+    self.segmentView.delegate = self;
+}
+
+- (void)initData{
+    //获取通讯录数据
+    [self requestContactAuthorAfterSystemVersion9];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -66,6 +81,25 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 66;
+}
+
+- (void)selectSegmentAction:(ClickIndex)index{
+    switch (index) {
+        case SegmentOne:
+            {
+                tableView.hidden = NO;
+                [tableView reloadData];
+            }
+            break;
+         case SegmentTwo:
+            {
+                tableView.hidden = YES;
+                self.view.backgroundColor = [UIColor grayColor];
+            }
+            break;
+        default:
+            break;
+    }
 }
 
 
