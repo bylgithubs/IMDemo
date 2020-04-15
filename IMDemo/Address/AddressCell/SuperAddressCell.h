@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SuperAddressCell : UITableViewCell
 
-- (void)setCellStyle;
+- (void)setCellContent;
 
 @end
 

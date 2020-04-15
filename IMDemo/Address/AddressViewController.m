@@ -31,10 +31,16 @@
     
     self.dataDic = [[NSMutableDictionary alloc] init];
     self.dataArr = [[NSMutableArray alloc] init];
-    tableView = [[UITableView alloc] initWithFrame:self.view.frame];
+    tableView = [[UITableView alloc] init];
     tableView.delegate = self;
     tableView.dataSource =self;
     [self.view addSubview:tableView];
+    [tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.view.mas_top);
+        make.left.mas_equalTo(self.view.mas_left);
+        make.right.mas_equalTo(self.view.mas_right);
+        make.bottom.mas_equalTo(self.view.mas_bottom);
+    }];
     self.ClickCellIndex = nil;
     self.sideSwitch = false;
     
@@ -72,7 +78,7 @@
     NSLog(@"=========%@",self.dataArr);
     addrCell.dataDic = self.dataDic;
     addrCell.dataArr = self.dataArr;
-    [addrCell setCellStyle];
+    [addrCell setCellContent];
     if (self.ClickCellIndex.section == indexPath.section && self.ClickCellIndex.row == indexPath.row && self.sideSwitch) {
         [addrCell addAddressSideView];
     }
@@ -82,9 +88,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"section======%ld,row======%ld",indexPath.section,indexPath.row);
+    NSLog(@"section======%ld,row======%ld",(long)indexPath.section,(long)indexPath.row);
     
     self.sideSwitch = !self.sideSwitch;
+    
     self.ClickCellIndex = indexPath;
     [tableView reloadData];
 }
@@ -93,7 +100,7 @@
     if (self.ClickCellIndex.section == indexPath.section && self.ClickCellIndex.row == indexPath.row && self.sideSwitch) {
         return 100;
     }
-    return 66;
+    return 45;
 }
 
 - (void)selectSegmentAction:(ClickIndex)index{

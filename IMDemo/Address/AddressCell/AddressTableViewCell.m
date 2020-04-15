@@ -18,20 +18,38 @@
     return self;
 }
 
-- (void)setCellStyle{
-    [super setCellStyle];
+- (void)setCellContent{
+    [super setCellContent];
     [self initUI];
 }
 
 - (void)initUI{
-    self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 10, 100, 30)];
+    NSLog(@"subview============%@",self.subviews);
+    for (UIView *subview in self.subviews) {
+        if ([subview isKindOfClass:[AddressSideView class]] || [subview isKindOfClass:[UILabel class]]) {
+            [subview removeFromSuperview];
+        }
+    }
+    self.nameLabel = [[UILabel alloc] init];
     [self addSubview:self.nameLabel];
+    [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.mas_top);
+        make.left.mas_equalTo(self.mas_left).mas_offset(30);
+        make.right.mas_equalTo(self.mas_right);
+        make.height.mas_equalTo(45);
+    }];
 }
 
 - (void)addAddressSideView{
-    CGRect frame = self.frame;
-    self.sideView = [[AddressSideView alloc] initWithFrame:CGRectMake(frame.origin.x, frame.size.height/2, frame.size.width, frame.size.height/2)];
+    self.sideView = [[AddressSideView alloc] initWithFrame:CGRectMake(0, 45, self.frame.size.width, 55)];
     [self addSubview:self.sideView];
+    //不能用masonry，masonry使用block布局会导致子视图无法显示
+//    [self.sideView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(self.nameLabel.mas_bottom);
+//        make.left.mas_equalTo(self.mas_left);
+//        make.right.mas_equalTo(self.mas_right);
+//        make.height.mas_equalTo(55);
+//    }];
 }
 
 - (void)awakeFromNib {

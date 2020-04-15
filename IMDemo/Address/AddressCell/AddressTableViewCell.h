@@ -8,6 +8,7 @@
 
 #import "SuperAddressCell.h"
 #import "AddressSideView.h"
+#import <Masonry/Masonry.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) UILabel *nameLabel;
 @property (nonatomic,strong) AddressSideView *sideView;
 
-- (void)setCellStyle;
+- (void)setCellContent;
 - (void)addAddressSideView;
 
 @end

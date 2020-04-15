@@ -16,8 +16,11 @@
 		640AE9052440184D00349FBC /* ChatRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 640AE9042440184D00349FBC /* ChatRecordViewController.m */; };
 		640AE9082440187200349FBC /* AddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 640AE9072440187200349FBC /* AddressViewController.m */; };
 		640AE90E24401FCC00349FBC /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 640AE90D24401FCC00349FBC /* MainTabBarViewController.m */; };
-		640AE9122440260600349FBC /* AddressTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 640AE9112440260600349FBC /* AddressTextCell.m */; };
 		640AE9152440265E00349FBC /* SuperAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 640AE9142440265E00349FBC /* SuperAddressCell.m */; };
+		64321A5C24458A6D00AAED56 /* AddressSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 64321A5B24458A6D00AAED56 /* AddressSegmentView.m */; };
+		646D2C822446ED49001457C9 /* ChatRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 646D2C812446ED49001457C9 /* ChatRoomViewController.m */; };
+		64707B5424459EEB0000CF5E /* AddressSideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 64707B5324459EEB0000CF5E /* AddressSideView.m */; };
+		64707B572445A4350000CF5E /* AddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 64707B562445A4350000CF5E /* AddressTableViewCell.m */; };
 		FF9FB1605571FC0F447A9EA2 /* Pods_IMDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 847563ECE830064246109974 /* Pods_IMDemo.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,10 +41,16 @@
 		640AE9072440187200349FBC /* AddressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressViewController.m; sourceTree = "<group>"; };
 		640AE90C24401FCC00349FBC /* MainTabBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainTabBarViewController.h; sourceTree = "<group>"; };
 		640AE90D24401FCC00349FBC /* MainTabBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainTabBarViewController.m; sourceTree = "<group>"; };
-		640AE9102440260600349FBC /* AddressTextCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressTextCell.h; sourceTree = "<group>"; };
-		640AE9112440260600349FBC /* AddressTextCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressTextCell.m; sourceTree = "<group>"; };
 		640AE9132440265E00349FBC /* SuperAddressCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SuperAddressCell.h; sourceTree = "<group>"; };
 		640AE9142440265E00349FBC /* SuperAddressCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SuperAddressCell.m; sourceTree = "<group>"; };
+		64321A5A24458A6D00AAED56 /* AddressSegmentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressSegmentView.h; sourceTree = "<group>"; };
+		64321A5B24458A6D00AAED56 /* AddressSegmentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressSegmentView.m; sourceTree = "<group>"; };
+		646D2C802446ED49001457C9 /* ChatRoomViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatRoomViewController.h; sourceTree = "<group>"; };
+		646D2C812446ED49001457C9 /* ChatRoomViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatRoomViewController.m; sourceTree = "<group>"; };
+		64707B5224459EEB0000CF5E /* AddressSideView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressSideView.h; sourceTree = "<group>"; };
+		64707B5324459EEB0000CF5E /* AddressSideView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressSideView.m; sourceTree = "<group>"; };
+		64707B552445A4350000CF5E /* AddressTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressTableViewCell.h; sourceTree = "<group>"; };
+		64707B562445A4350000CF5E /* AddressTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressTableViewCell.m; sourceTree = "<group>"; };
 		847563ECE830064246109974 /* Pods_IMDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IMDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BADF00D5904A31C4A08C1CCE /* Pods-IMDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMDemo.release.xcconfig"; path = "Target Support Files/Pods-IMDemo/Pods-IMDemo.release.xcconfig"; sourceTree = "<group>"; };
 		F67D21571D348ADF2CB5FCAC /* Pods-IMDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMDemo.debug.xcconfig"; path = "Target Support Files/Pods-IMDemo/Pods-IMDemo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -115,6 +124,7 @@
 		640AE9012440179100349FBC /* Address */ = {
 			isa = PBXGroup;
 			children = (
+				64321A59244589F400AAED56 /* AddressCustomView */,
 				640ABDF224405A3C0048A44B /* AddressModel */,
 				640AE90F244025BB00349FBC /* AddressCell */,
 				640AE9062440187200349FBC /* AddressViewController.h */,
@@ -126,8 +136,8 @@
 		640AE902244017CA00349FBC /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				640AE9032440184D00349FBC /* ChatRecordViewController.h */,
-				640AE9042440184D00349FBC /* ChatRecordViewController.m */,
+				646D2C7F2446ECF8001457C9 /* ChatRoom */,
+				646D2C7E2446ECD0001457C9 /* ChatRecord */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -135,12 +145,41 @@
 		640AE90F244025BB00349FBC /* AddressCell */ = {
 			isa = PBXGroup;
 			children = (
-				640AE9102440260600349FBC /* AddressTextCell.h */,
-				640AE9112440260600349FBC /* AddressTextCell.m */,
 				640AE9132440265E00349FBC /* SuperAddressCell.h */,
 				640AE9142440265E00349FBC /* SuperAddressCell.m */,
+				64707B5224459EEB0000CF5E /* AddressSideView.h */,
+				64707B5324459EEB0000CF5E /* AddressSideView.m */,
+				64707B552445A4350000CF5E /* AddressTableViewCell.h */,
+				64707B562445A4350000CF5E /* AddressTableViewCell.m */,
 			);
 			path = AddressCell;
+			sourceTree = "<group>";
+		};
+		64321A59244589F400AAED56 /* AddressCustomView */ = {
+			isa = PBXGroup;
+			children = (
+				64321A5A24458A6D00AAED56 /* AddressSegmentView.h */,
+				64321A5B24458A6D00AAED56 /* AddressSegmentView.m */,
+			);
+			path = AddressCustomView;
+			sourceTree = "<group>";
+		};
+		646D2C7E2446ECD0001457C9 /* ChatRecord */ = {
+			isa = PBXGroup;
+			children = (
+				640AE9032440184D00349FBC /* ChatRecordViewController.h */,
+				640AE9042440184D00349FBC /* ChatRecordViewController.m */,
+			);
+			path = ChatRecord;
+			sourceTree = "<group>";
+		};
+		646D2C7F2446ECF8001457C9 /* ChatRoom */ = {
+			isa = PBXGroup;
+			children = (
+				646D2C802446ED49001457C9 /* ChatRoomViewController.h */,
+				646D2C812446ED49001457C9 /* ChatRoomViewController.m */,
+			);
+			path = ChatRoom;
 			sourceTree = "<group>";
 		};
 		8395797894B764E19AC63C07 /* Pods */ = {
@@ -266,8 +305,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64707B5424459EEB0000CF5E /* AddressSideView.m in Sources */,
 				640AE90E24401FCC00349FBC /* MainTabBarViewController.m in Sources */,
-				640AE9122440260600349FBC /* AddressTextCell.m in Sources */,
+				646D2C822446ED49001457C9 /* ChatRoomViewController.m in Sources */,
+				64321A5C24458A6D00AAED56 /* AddressSegmentView.m in Sources */,
+				64707B572445A4350000CF5E /* AddressTableViewCell.m in Sources */,
 				640AE8FB2440164D00349FBC /* main.m in Sources */,
 				640AE9152440265E00349FBC /* SuperAddressCell.m in Sources */,
 				640AE9082440187200349FBC /* AddressViewController.m in Sources */,

@@ -19,7 +19,7 @@
     return self;
 }
 
-- (void)setCellStyle{
+- (void)setCellContent{
     self.backgroundColor = [UIColor whiteColor];
 }
 

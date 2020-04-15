@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Masonry/Masonry.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface AddressSideView : UIView
 
+- (instancetype)init;
 - (instancetype)initWithFrame:(CGRect)frame;
 
 @end
