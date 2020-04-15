@@ -46,7 +46,8 @@
     startChatBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [startChatBtn setTitle:@"开始聊天" forState:UIControlStateNormal];
     startChatBtn.backgroundColor = [UIColor lightGrayColor];
-    [startChatBtn addTarget:self action:@selector(startChatAction) forControlEvents:UIControlEventTouchUpInside];
+    startChatBtn.tag = 1;
+    [startChatBtn addTarget:self action:@selector(sideViewClickBtn:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:startChatBtn];
     [startChatBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.mas_top);
@@ -59,7 +60,8 @@
     detailInformation = [UIButton buttonWithType:UIButtonTypeCustom];
     [detailInformation setTitle:@"详细信息" forState:UIControlStateNormal];
     detailInformation.backgroundColor = [UIColor lightGrayColor];
-    [detailInformation addTarget:self action:@selector(detailInformationAction) forControlEvents:UIControlEventTouchUpInside];
+    detailInformation.tag = 2;
+    [detailInformation addTarget:self action:@selector(sideViewClickBtn:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:detailInformation];
     [detailInformation mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.mas_top);
@@ -69,12 +71,14 @@
     }];
 }
 
-- (void)startChatAction{
+- (void)sideViewClickBtn:(id)sender{
+    UIButton *btn = (UIButton *)sender;
+    NSLog(@"tag===========%ld",(long)btn.tag);
+    if ([self.delegate respondsToSelector:@selector(sideViewClick:)]) {
+        [self.delegate sideViewClick:btn.tag];
+    }
     
 }
 
-- (void)detailInformationAction{
-    
-}
 
 @end

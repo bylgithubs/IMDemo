@@ -8,8 +8,9 @@
 
 #import "AddressViewController.h"
 #import "AddressSegmentView.h"
+#import "ChatRoomModel.h"
 
-@interface AddressViewController ()<UITableViewDelegate,UITableViewDataSource,SegmentViewDelegate>
+@interface AddressViewController ()<UITableViewDelegate,UITableViewDataSource,SegmentViewDelegate,AddressSideViewDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) NSMutableDictionary *dataDic;
@@ -17,6 +18,7 @@
 @property (nonatomic,strong) AddressSegmentView *segmentView;
 @property (nonatomic,strong) NSIndexPath *ClickCellIndex;
 @property (nonatomic,assign) BOOL sideSwitch;
+@property (nonatomic,strong) AddressDataModel *addressDataModel;
 
 
 @end
@@ -31,6 +33,7 @@
     
     self.dataDic = [[NSMutableDictionary alloc] init];
     self.dataArr = [[NSMutableArray alloc] init];
+    self.addressDataModel = [[AddressDataModel alloc] init];
     tableView = [[UITableView alloc] init];
     tableView.delegate = self;
     tableView.dataSource =self;
@@ -81,6 +84,7 @@
     [addrCell setCellContent];
     if (self.ClickCellIndex.section == indexPath.section && self.ClickCellIndex.row == indexPath.row && self.sideSwitch) {
         [addrCell addAddressSideView];
+        addrCell.sideView.delegate = self;
     }
     addrCell.nameLabel.text = self.dataArr[indexPath.row];
     return addrCell;
@@ -93,6 +97,10 @@
     self.sideSwitch = !self.sideSwitch;
     
     self.ClickCellIndex = indexPath;
+    
+    self.addressDataModel = [self.dataDic objectForKey:self.dataArr[indexPath.row]];
+    NSLog(@"===========%@",self.addressDataModel);
+    AddressDataModel *model = self.addressDataModel;
     [tableView reloadData];
 }
 
@@ -122,6 +130,11 @@
     }
 }
 
+- (void)sideViewClick:(NSInteger)btnTag{
+    ChatRoomViewController *chatRoomVC = [[ChatRoomViewController alloc] init];
+    chatRoomVC.addressDataModel = self.addressDataModel;
+    [self.navigationController pushViewController:chatRoomVC animated:YES];
+}
 
 //请求通讯录权限
 #pragma mark 请求通讯录权限

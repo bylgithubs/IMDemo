@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AddressDataModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ChatRoomViewController : UIViewController
+
+@property (nonatomic,strong) AddressDataModel *addressDataModel;
 
 @end
 

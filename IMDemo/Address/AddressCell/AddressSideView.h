@@ -11,7 +11,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol AddressSideViewDelegate <NSObject>
+
+- (void)sideViewClick:(NSInteger)btnTag;
+
+@end
+
 @interface AddressSideView : UIView
+
+@property (nonatomic,weak) id<AddressSideViewDelegate> delegate;
 
 - (instancetype)init;
 - (instancetype)initWithFrame:(CGRect)frame;

@@ -1,0 +1,14 @@
+//
+//  IMDemoPrefix.pch
+//  IMDemo
+//
+//  Created by Civet on 2020/4/15.
+//  Copyright © 2020 PersonalONBYL. All rights reserved.
+//
+
+#ifndef IMDemoPrefix_h
+#define IMDemoPrefix_h
+
+#import "constant.h"
+
+#endif /* IMDemoPrefix_h */

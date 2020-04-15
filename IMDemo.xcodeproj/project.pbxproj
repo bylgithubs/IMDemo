@@ -19,6 +19,7 @@
 		640AE9152440265E00349FBC /* SuperAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 640AE9142440265E00349FBC /* SuperAddressCell.m */; };
 		64321A5C24458A6D00AAED56 /* AddressSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 64321A5B24458A6D00AAED56 /* AddressSegmentView.m */; };
 		646D2C822446ED49001457C9 /* ChatRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 646D2C812446ED49001457C9 /* ChatRoomViewController.m */; };
+		646D2C862446F608001457C9 /* ChatRoomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 646D2C852446F608001457C9 /* ChatRoomModel.m */; };
 		64707B5424459EEB0000CF5E /* AddressSideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 64707B5324459EEB0000CF5E /* AddressSideView.m */; };
 		64707B572445A4350000CF5E /* AddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 64707B562445A4350000CF5E /* AddressTableViewCell.m */; };
 		FF9FB1605571FC0F447A9EA2 /* Pods_IMDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 847563ECE830064246109974 /* Pods_IMDemo.framework */; };
@@ -47,6 +48,10 @@
 		64321A5B24458A6D00AAED56 /* AddressSegmentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressSegmentView.m; sourceTree = "<group>"; };
 		646D2C802446ED49001457C9 /* ChatRoomViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatRoomViewController.h; sourceTree = "<group>"; };
 		646D2C812446ED49001457C9 /* ChatRoomViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatRoomViewController.m; sourceTree = "<group>"; };
+		646D2C842446F608001457C9 /* ChatRoomModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatRoomModel.h; sourceTree = "<group>"; };
+		646D2C852446F608001457C9 /* ChatRoomModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatRoomModel.m; sourceTree = "<group>"; };
+		646D2CAF24470248001457C9 /* IMDemoPrefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMDemoPrefix.pch; sourceTree = "<group>"; };
+		646D2CB1244702A6001457C9 /* constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = constant.h; sourceTree = "<group>"; };
 		64707B5224459EEB0000CF5E /* AddressSideView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressSideView.h; sourceTree = "<group>"; };
 		64707B5324459EEB0000CF5E /* AddressSideView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressSideView.m; sourceTree = "<group>"; };
 		64707B552445A4350000CF5E /* AddressTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressTableViewCell.h; sourceTree = "<group>"; };
@@ -106,6 +111,8 @@
 		640AE8EA2440164C00349FBC /* IMDemo */ = {
 			isa = PBXGroup;
 			children = (
+				646D2CB024470271001457C9 /* CommonFiles */,
+				646D2CAE24470210001457C9 /* ConfigFiles */,
 				640AE902244017CA00349FBC /* Chat */,
 				640AE9012440179100349FBC /* Address */,
 				640AE8EB2440164C00349FBC /* AppDelegate.h */,
@@ -176,10 +183,36 @@
 		646D2C7F2446ECF8001457C9 /* ChatRoom */ = {
 			isa = PBXGroup;
 			children = (
+				646D2C832446F59D001457C9 /* ChatRoomModel */,
 				646D2C802446ED49001457C9 /* ChatRoomViewController.h */,
 				646D2C812446ED49001457C9 /* ChatRoomViewController.m */,
 			);
 			path = ChatRoom;
+			sourceTree = "<group>";
+		};
+		646D2C832446F59D001457C9 /* ChatRoomModel */ = {
+			isa = PBXGroup;
+			children = (
+				646D2C842446F608001457C9 /* ChatRoomModel.h */,
+				646D2C852446F608001457C9 /* ChatRoomModel.m */,
+			);
+			path = ChatRoomModel;
+			sourceTree = "<group>";
+		};
+		646D2CAE24470210001457C9 /* ConfigFiles */ = {
+			isa = PBXGroup;
+			children = (
+				646D2CAF24470248001457C9 /* IMDemoPrefix.pch */,
+			);
+			path = ConfigFiles;
+			sourceTree = "<group>";
+		};
+		646D2CB024470271001457C9 /* CommonFiles */ = {
+			isa = PBXGroup;
+			children = (
+				646D2CB1244702A6001457C9 /* constant.h */,
+			);
+			path = CommonFiles;
 			sourceTree = "<group>";
 		};
 		8395797894B764E19AC63C07 /* Pods */ = {
@@ -219,6 +252,7 @@
 		640AE8E02440164C00349FBC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = "";
 				LastUpgradeCheck = 1030;
 				ORGANIZATIONNAME = PersonalONBYL;
 				TargetAttributes = {
@@ -309,6 +343,7 @@
 				640AE90E24401FCC00349FBC /* MainTabBarViewController.m in Sources */,
 				646D2C822446ED49001457C9 /* ChatRoomViewController.m in Sources */,
 				64321A5C24458A6D00AAED56 /* AddressSegmentView.m in Sources */,
+				646D2C862446F608001457C9 /* ChatRoomModel.m in Sources */,
 				64707B572445A4350000CF5E /* AddressTableViewCell.m in Sources */,
 				640AE8FB2440164D00349FBC /* main.m in Sources */,
 				640AE9152440265E00349FBC /* SuperAddressCell.m in Sources */,
@@ -382,6 +417,8 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/IMDemo/ConfigFiles/IMDemoPrefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -439,6 +476,8 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/IMDemo/ConfigFiles/IMDemoPrefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -460,6 +499,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7YYRDAUH4V;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				INFOPLIST_FILE = IMDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -479,6 +519,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7YYRDAUH4V;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				INFOPLIST_FILE = IMDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (

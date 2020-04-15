@@ -17,6 +17,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self initUI];
+    
+}
+
+- (void)initUI{
+    if (self.addressDataModel.name!=nil) {
+        [self.navigationItem setTitle:self.addressDataModel.name];
+    } else {
+        [self.navigationItem setTitle:self.addressDataModel.homePhone];
+    }
+    
+    self.view.backgroundColor = [UIColor whiteColor];
 }
 
 /*

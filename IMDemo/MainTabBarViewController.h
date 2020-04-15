@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Address/AddressViewController.h"
-#import "Chat/ChatRecordViewController.h"
+#import "ChatRecordViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

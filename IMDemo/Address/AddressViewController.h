@@ -11,6 +11,7 @@
 #import <Contacts/Contacts.h>
 #import "AddressModel/AddressDataModel.h"
 #import <Masonry/Masonry.h>
+#import "ChatRoomViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
