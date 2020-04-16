@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "AddressDataModel.h"
+#import "ChatRoomTextCell.h"
+#import "CommonComponentMethods.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
