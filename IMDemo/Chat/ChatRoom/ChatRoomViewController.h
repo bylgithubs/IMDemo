@@ -10,6 +10,7 @@
 #import "AddressDataModel.h"
 #import "ChatRoomTextCell.h"
 #import "CommonComponentMethods.h"
+#import "CommonMethods.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

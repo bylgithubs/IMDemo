@@ -16,9 +16,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)KeyboardView:(KeyboardView *)keyboardView textFiledBegin:(UITextView *)textFiled;
 
+@optional
+-(void)KeyboardView:(KeyboardView *)keyboardView sendBtnClick:(UIButton *)sender text:(NSString *)text attribute:(NSAttributedString *)attr;
+
 @end
 
 @interface KeyboardView : UIView
+
+@property (nonatomic,weak) id<KeyboardViewDelegate> delegate;
 
 + (KeyboardView *)sharedInstance;
 

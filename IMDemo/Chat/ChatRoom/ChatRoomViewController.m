@@ -7,11 +7,13 @@
 //
 
 #import "ChatRoomViewController.h"
+#import "KeyboardView.h"
 
-@interface ChatRoomViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface ChatRoomViewController ()<UITableViewDelegate,UITableViewDataSource,KeyboardViewDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) NSMutableArray *dataArr;
+@property (nonatomic,strong) KeyboardView *keyboard;
 
 @end
 
@@ -80,14 +82,32 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
-    //[self addKeyBoard];
+    [self addKeyBoard];
 }
 
 - (void)addKeyBoard{
-//    self.keyBoard = [KeyboardView sharedInstance];
-//    self.keyBoard.tag = 2020;
-//    self.keyBoard.frame = CGRectMake(0, self.view.frame.size.height - 44 -SafeAreaBottom, self.view.frame.size.width, 260);
+    self.keyboard = [KeyboardView sharedInstance];
+    self.keyboard.tag = 2020;
+    self.keyboard.frame = CGRectMake(0, self.view.frame.size.height - 44 -SafeAreaBottom, self.view.frame.size.width, 260);
+    self.keyboard.delegate = self;
+    self.keyboard.backgroundColor = [UIColor grayColor];
+    [self.view addSubview:self.keyboard];
     
+    
+}
+
+- (void)KeyboardView:(KeyboardView *)keyboardView textFiledBegin:(UITextView *)textFiled{
+    
+}
+
+-(void)KeyboardView:(KeyboardView *)keyboardView sendBtnClick:(UIButton *)sender text:(NSString *)text attribute:(NSAttributedString *)attr{
+    NSString *string = text;
+    if (text.length > 0) {
+        if ([CommonMethods isEmptyString:text]) {
+            return;
+        }
+        
+    }
 }
 
 /*
