@@ -79,6 +79,17 @@
     return 100;
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    //[self addKeyBoard];
+}
+
+- (void)addKeyBoard{
+//    self.keyBoard = [KeyboardView sharedInstance];
+//    self.keyBoard.tag = 2020;
+//    self.keyBoard.frame = CGRectMake(0, self.view.frame.size.height - 44 -SafeAreaBottom, self.view.frame.size.width, 260);
+    
+}
+
 /*
 #pragma mark - Navigation
 
