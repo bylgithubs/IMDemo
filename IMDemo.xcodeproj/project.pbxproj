@@ -22,6 +22,7 @@
 		646D2C862446F608001457C9 /* ChatRoomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 646D2C852446F608001457C9 /* ChatRoomModel.m */; };
 		64707B5424459EEB0000CF5E /* AddressSideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 64707B5324459EEB0000CF5E /* AddressSideView.m */; };
 		64707B572445A4350000CF5E /* AddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 64707B562445A4350000CF5E /* AddressTableViewCell.m */; };
+		6471BB2724498B480068231A /* KeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6471BB2624498B480068231A /* KeyboardView.m */; };
 		6476206524480EFD008AC38D /* SuperChatRoomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6476206424480EFD008AC38D /* SuperChatRoomCell.m */; };
 		6476206824480F35008AC38D /* ChatRoomTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6476206724480F35008AC38D /* ChatRoomTextCell.m */; };
 		6476206B24484824008AC38D /* CommonComponentMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 6476206A24484824008AC38D /* CommonComponentMethods.m */; };
@@ -59,6 +60,8 @@
 		64707B5324459EEB0000CF5E /* AddressSideView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressSideView.m; sourceTree = "<group>"; };
 		64707B552445A4350000CF5E /* AddressTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressTableViewCell.h; sourceTree = "<group>"; };
 		64707B562445A4350000CF5E /* AddressTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressTableViewCell.m; sourceTree = "<group>"; };
+		6471BB2524498B480068231A /* KeyboardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyboardView.h; sourceTree = "<group>"; };
+		6471BB2624498B480068231A /* KeyboardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KeyboardView.m; sourceTree = "<group>"; };
 		6476206324480EFD008AC38D /* SuperChatRoomCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SuperChatRoomCell.h; sourceTree = "<group>"; };
 		6476206424480EFD008AC38D /* SuperChatRoomCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SuperChatRoomCell.m; sourceTree = "<group>"; };
 		6476206624480F35008AC38D /* ChatRoomTextCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatRoomTextCell.h; sourceTree = "<group>"; };
@@ -220,11 +223,21 @@
 		646D2CB024470271001457C9 /* CommonFiles */ = {
 			isa = PBXGroup;
 			children = (
+				6471BB2424498B1C0068231A /* Keyboard */,
 				646D2CB1244702A6001457C9 /* constant.h */,
 				6476206924484824008AC38D /* CommonComponentMethods.h */,
 				6476206A24484824008AC38D /* CommonComponentMethods.m */,
 			);
 			path = CommonFiles;
+			sourceTree = "<group>";
+		};
+		6471BB2424498B1C0068231A /* Keyboard */ = {
+			isa = PBXGroup;
+			children = (
+				6471BB2524498B480068231A /* KeyboardView.h */,
+				6471BB2624498B480068231A /* KeyboardView.m */,
+			);
+			path = Keyboard;
 			sourceTree = "<group>";
 		};
 		6476206224480EB3008AC38D /* ChatRoomCell */ = {
@@ -367,6 +380,7 @@
 				646D2C822446ED49001457C9 /* ChatRoomViewController.m in Sources */,
 				64321A5C24458A6D00AAED56 /* AddressSegmentView.m in Sources */,
 				646D2C862446F608001457C9 /* ChatRoomModel.m in Sources */,
+				6471BB2724498B480068231A /* KeyboardView.m in Sources */,
 				6476206824480F35008AC38D /* ChatRoomTextCell.m in Sources */,
 				64707B572445A4350000CF5E /* AddressTableViewCell.m in Sources */,
 				6476206B24484824008AC38D /* CommonComponentMethods.m in Sources */,
