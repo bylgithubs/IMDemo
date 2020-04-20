@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Masonry/Masonry.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @optional
 -(void)KeyboardView:(KeyboardView *)keyboardView sendBtnClick:(UIButton *)sender text:(NSString *)text attribute:(NSAttributedString *)attr;
+-(void)KeyBoardViewHeightChange:(CGRect)keyboardFrame;
 
 @end
 
@@ -26,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,weak) id<KeyboardViewDelegate> delegate;
 
 + (KeyboardView *)sharedInstance;
+- (void)resignKeyboard;
 
 @end
 

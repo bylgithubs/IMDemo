@@ -14,10 +14,15 @@
 @property (nonatomic,strong) UIView *toolView;
 @property (nonatomic,strong) CustomTextView *customTV;
 @property (nonatomic,strong) UIButton *sendBtn;
+//@property (nonatomic,assign) CGFloat keyboardHeight;
+@property (nonatomic,assign) CGRect toolFrame;
+//@property (nonatomic,assign) CGRect keyboardFrame;
+//@property (nonatomic,assign) BOOL isShowKeyboard;
 
 @end
 
 @implementation KeyboardView
+//@synthesize keyboardHeight;
 
 static KeyboardView *sharedInstance = nil;
 
@@ -26,6 +31,7 @@ static KeyboardView *sharedInstance = nil;
     dispatch_once(&once, ^{
         sharedInstance = [[self alloc] init];
         sharedInstance.frame = CGRectMake(0, 0, SCREEN_WIDTH, 260);
+        sharedInstance.backgroundColor = [UIColor grayColor];
         sharedInstance.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
         [[NSNotificationCenter defaultCenter] addObserver:sharedInstance selector:@selector(keyboardHeightChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
         [sharedInstance initKeyboard];
@@ -35,26 +41,49 @@ static KeyboardView *sharedInstance = nil;
 }
 
 - (void)initKeyboard{
-    self.toolView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 44)];
+//    self.toolView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 44)];
+    self.toolView = [[UIView alloc] init];
+    
+    self.toolFrame = self.toolView.frame;
     self.toolView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self addSubview:self.toolView];
-    
+    [self.toolView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.mas_top);
+        make.left.mas_equalTo(self.mas_left);
+        make.height.mas_equalTo(44);
+        make.right.mas_equalTo(self.mas_right);
+    }];
+
     if (!self.customTV) {
-        self.customTV = [[CustomTextView alloc] initWithFrame:CGRectMake(10, 5, self.toolView.frame.size.width - 100, 40)];
+//        self.customTV = [[CustomTextView alloc] initWithFrame:CGRectMake(10, 5, self.toolView.frame.size.width - 100, 40)];
+        self.customTV = [[CustomTextView alloc] init];
+        
         self.customTV.font = [UIFont systemFontOfSize:18];
         self.customTV.delegate = self;
         [self.toolView addSubview:self.customTV];
+        [self.customTV mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.toolView.mas_top).mas_offset(5);
+            make.left.mas_equalTo(self.toolView.mas_left).mas_offset(10);
+            make.height.mas_equalTo(44);
+            make.right.mas_equalTo(self.toolView.mas_right).mas_offset(-100);
+        }];
     }
     
     if (!self.sendBtn) {
         CGRect toolFrame = self.toolView.frame;
         self.sendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.sendBtn.frame = CGRectMake(toolFrame.size.width - 80, 5, 60, 40);
+//        self.sendBtn.frame = CGRectMake(toolFrame.size.width - 80, 5, 60, 40);
         [self.sendBtn setTitle:@"发送" forState:UIControlStateNormal];
         self.sendBtn.backgroundColor = [UIColor whiteColor];
         [self.sendBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
         [self.sendBtn addTarget:self action:@selector(sendBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.toolView addSubview:self.sendBtn];
+        [self.sendBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.toolView.mas_top).mas_offset(5);
+            make.width.mas_equalTo(60);
+            make.height.mas_equalTo(44);
+            make.right.mas_equalTo(self.toolView.mas_right).mas_offset(-20);
+        }];
     }
     
     
@@ -66,8 +95,46 @@ static KeyboardView *sharedInstance = nil;
     }
 }
 
+
 - (void)keyboardHeightChange:(NSNotification *)notification{
+    NSLog(@"==============");
+    NSDictionary *userInfo = [notification userInfo];
+    NSValue* aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect = [aValue CGRectValue];
     
+    CGRect customKeyboardFrame = self.frame;
+    //CGRect toolFrame = self.toolView.frame;
+    
+    customKeyboardFrame.origin.y = keyboardRect.origin.y - self.toolFrame.size.height - 44 - 10;
+    customKeyboardFrame.size.height = keyboardRect.size.height + self.toolFrame.size.height;
+//    if (keyboardRect.origin.y < self.toolView.frame.origin.y) {
+//        customKeyboardFrame.origin.y = keyboardRect.origin.y - self.toolFrame.size.height;
+//        customKeyboardFrame.size.height = keyboardRect.size.height + self.toolFrame.size.height;
+//    } else {
+//        customKeyboardFrame.origin.y = SCREEN_HEIGHT- 44 -SafeAreaBottom;
+//        customKeyboardFrame.size.height = self.toolView.frame.size.height;
+//    }
+    
+    //keyboardHeight = self.toolView.frame.size.height;
+//    CGRect toolFrame = self.toolView.frame;
+//    if (keyboardRect.size.height > self.toolView.frame.size.height) {
+//        toolFrame.origin.y = keyboardRect.origin.y - self.toolView.frame.size.height;
+//        
+//    } else {
+//        toolFrame.origin.y = 0;
+//    }
+//    self.toolView.frame = toolFrame;
+    if ([self.delegate respondsToSelector:@selector(KeyBoardViewHeightChange:)]) {
+        [self.delegate KeyBoardViewHeightChange:customKeyboardFrame];
+    }
+    //mkeyboardFrame.origin.y = keyboardFrame.origin.y - keyboardRect.size.height;
+    //keyboardFrame.size.height = keyboardRect.size.height + keyboardHeight;
+    //self.toolView.frame = keyboardFrame;
+}
+
+- (void)resignKeyboard{
+    [self.customTV resignFirstResponder];
+    [self resignFirstResponder];
 }
 
 /*

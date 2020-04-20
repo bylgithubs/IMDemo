@@ -14,6 +14,7 @@
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) NSMutableArray *dataArr;
 @property (nonatomic,strong) KeyboardView *keyboard;
+@property (nonatomic,strong) UITapGestureRecognizer *packUpKeyboard;
 
 @end
 
@@ -26,6 +27,9 @@
     // Do any additional setup after loading the view.
     [self initUI];
     [self initData];
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    self.packUpKeyboard = tapGesture;
+    [tableView addGestureRecognizer:self.packUpKeyboard];
 }
 
 - (void)initUI{
@@ -88,12 +92,22 @@
 - (void)addKeyBoard{
     self.keyboard = [KeyboardView sharedInstance];
     self.keyboard.tag = 2020;
-    self.keyboard.frame = CGRectMake(0, self.view.frame.size.height - 44 -SafeAreaBottom, self.view.frame.size.width, 260);
+    self.keyboard.frame = CGRectMake(0, self.view.frame.size.height - 44 -SafeAreaBottom - 10, self.view.frame.size.width, 260);
     self.keyboard.delegate = self;
     self.keyboard.backgroundColor = [UIColor grayColor];
     [self.view addSubview:self.keyboard];
     
-    
+}
+
+- (void)dismissKeyboard{
+    [self.keyboard resignKeyboard];
+}
+
+
+-(void)KeyBoardViewHeightChange:(CGRect)keyboardFrame{
+//    CGRect customKeyboardFrame = self.keyboard.frame;
+//    customKeyboardFrame.origin.y =
+    self.keyboard.frame = keyboardFrame;
 }
 
 - (void)KeyboardView:(KeyboardView *)keyboardView textFiledBegin:(UITextView *)textFiled{
