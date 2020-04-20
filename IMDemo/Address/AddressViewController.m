@@ -8,7 +8,6 @@
 
 #import "AddressViewController.h"
 #import "AddressSegmentView.h"
-#import "ChatRoomModel.h"
 
 @interface AddressViewController ()<UITableViewDelegate,UITableViewDataSource,SegmentViewDelegate,AddressSideViewDelegate>
 

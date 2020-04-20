@@ -8,6 +8,7 @@
 
 #import "ChatRoomViewController.h"
 #import "KeyboardView.h"
+#import "ChatRoomModel.h"
 
 @interface ChatRoomViewController ()<UITableViewDelegate,UITableViewDataSource,KeyboardViewDelegate>
 
@@ -121,7 +122,26 @@
             return;
         }
         [[NSNotificationCenter defaultCenter] postNotificationName:DeleteKeyboardText object:nil];
+        [self SendDataAndInsertDB:text];
     }
+}
+
+//发送和存储消息
+- (void)SendDataAndInsertDB:(NSString *)message{
+    dispatch_queue_t dispatchQueue = dispatch_queue_create("SendDataAndInsertDB", nil);
+    dispatch_async(dispatchQueue, ^{
+        ChatRoomModel *chatRoomModel = [[ChatRoomModel alloc] init];
+        chatRoomModel.jID = [NSString stringWithFormat:@"%@",[NSDate date]] ;
+        if (self.addressDataModel.name) {
+            chatRoomModel.name = self.addressDataModel.name;
+        } else {
+            chatRoomModel.name = self.addressDataModel.homePhone;
+        }
+        if (message != nil) {
+            chatRoomModel.content = message;
+        }
+        
+    });
 }
 
 /*
