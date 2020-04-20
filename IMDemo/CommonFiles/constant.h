@@ -21,4 +21,11 @@ isPhoneX = [[UIApplication sharedApplication] delegate].window.safeAreaInsets.bo
 
 #define SafeAreaBottom (Device_Is_iPhoneX ? 34.f : 0.f) //底部安全距离
 
+
+
+
+
+//通知
+#define DeleteKeyboardText @"DeleteKeyboardText"
+
 #endif /* constant_h */

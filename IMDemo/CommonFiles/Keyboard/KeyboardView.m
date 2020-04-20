@@ -92,7 +92,12 @@ static KeyboardView *sharedInstance = nil;
 - (void)sendBtnClick:(UIButton *)button{
     if ([self.delegate respondsToSelector:@selector(KeyboardView:sendBtnClick:text:attribute:)]) {
         [self.delegate KeyboardView:self sendBtnClick:button text:self.customTV.text attribute:self.customTV.attributedText];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteTextViewData) name:DeleteKeyboardText object:nil];
     }
+}
+
+- (void)deleteTextViewData{
+    self.customTV.text = @"";
 }
 
 
@@ -135,6 +140,10 @@ static KeyboardView *sharedInstance = nil;
 - (void)resignKeyboard{
     [self.customTV resignFirstResponder];
     [self resignFirstResponder];
+}
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:DeleteKeyboardText object:nil];
 }
 
 /*

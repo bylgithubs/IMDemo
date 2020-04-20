@@ -120,7 +120,7 @@
         if ([CommonMethods isEmptyString:text]) {
             return;
         }
-        
+        [[NSNotificationCenter defaultCenter] postNotificationName:DeleteKeyboardText object:nil];
     }
 }
 
