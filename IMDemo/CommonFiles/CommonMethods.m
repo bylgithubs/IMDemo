@@ -15,4 +15,13 @@
     return [text isEqualToString:@""];
 }
 
++(NSString *)setDateFormat:(NSDate *)date{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    [formatter setDateFormat:@"YYYY-MM-dd hh:mm:ss"];
+    
+    return [formatter stringFromDate:date];
+}
+
 @end

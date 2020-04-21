@@ -24,7 +24,18 @@
     self.window.rootViewController = mainTabBarVC;
     [self.window makeKeyAndVisible];
     
+    //创建数据库
+    [self initDB];
+    
     return YES;
+}
+
+//创建数据库
+- (void)initDB{
+    FMDBOperation *shareInstance = [FMDBOperation sharedDatabaseInstance];
+    
+    [shareInstance initDB];
+    
 }
 
 

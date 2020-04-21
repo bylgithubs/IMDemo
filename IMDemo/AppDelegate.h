@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MainTabBarViewController.h"
+#import "FMDBOperation.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

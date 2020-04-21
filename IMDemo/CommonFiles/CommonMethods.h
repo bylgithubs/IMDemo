@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 +(BOOL)isEmptyString:(NSString *)text;
 
++(NSString *)setDateFormat:(NSDate *)date;
+
 @end
 
 NS_ASSUME_NONNULL_END

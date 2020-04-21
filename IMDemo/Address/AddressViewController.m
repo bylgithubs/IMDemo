@@ -85,7 +85,13 @@
         [addrCell addAddressSideView];
         addrCell.sideView.delegate = self;
     }
-    addrCell.nameLabel.text = self.dataArr[indexPath.row];
+    AddressDataModel *model = self.dataArr[indexPath.row];
+    if (model.name != nil) {
+        addrCell.nameLabel.text = model.name;
+    } else {
+        addrCell.nameLabel.text = model.homePhone;
+    }
+    
     return addrCell;
     
 }
@@ -97,9 +103,9 @@
     
     self.ClickCellIndex = indexPath;
     
-    self.addressDataModel = [self.dataDic objectForKey:self.dataArr[indexPath.row]];
+    self.addressDataModel = self.dataArr[indexPath.row];
+    //self.addressDataModel = [self.dataDic objectForKey:self.dataArr[indexPath.row]];
     NSLog(@"===========%@",self.addressDataModel);
-    AddressDataModel *model = self.addressDataModel;
     [tableView reloadData];
 }
 
@@ -132,6 +138,9 @@
 - (void)sideViewClick:(NSInteger)btnTag{
     ChatRoomViewController *chatRoomVC = [[ChatRoomViewController alloc] init];
     chatRoomVC.addressDataModel = self.addressDataModel;
+    AddressDataModel *model = self.addressDataModel;
+    NSString *str = self.addressDataModel.name;
+    NSString *str1 = self.addressDataModel.jID;
     [self.navigationController pushViewController:chatRoomVC animated:YES];
 }
 
@@ -181,6 +190,8 @@
         
         AddressDataModel *model = [[AddressDataModel alloc] init];
         
+        NSString *str = contact.identifier;
+        model.jID = contact.identifier;
         NSString *givenName = contact.givenName;
         NSString *familyName = contact.familyName;
         NSLog(@"givenName=%@, familyName=%@", givenName, familyName);
@@ -190,6 +201,7 @@
         NSArray *phoneNumbers = contact.phoneNumbers;
         for (CNLabeledValue *labelValue in phoneNumbers) {
             //遍历一个人名下的多个电话号码
+            
             NSString *phoneType = labelValue.label;
             //   NSString *    phoneNumber = labelValue.value;
             CNPhoneNumber *phoneNumber = labelValue.value;
@@ -223,13 +235,10 @@
             }
                             
         }
-        [self.dataDic setObject:model forKey:model.name];
-        if (model.name!=nil) {
-            [self.dataArr addObject:model.name];
-        } else {
-            [self.dataArr addObject:model.homePhone];
+        //[self.dataDic setObject:model forKey:model.jID];
+        if (model!=nil) {
+            [self.dataArr addObject:model];
         }
-        
         NSLog(@"=========%@",self.dataArr);
         //    *stop = YES; // 停止循环，相当于break；
         

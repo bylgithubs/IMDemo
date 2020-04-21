@@ -11,6 +11,7 @@
 #import "ChatRoomTextCell.h"
 #import "CommonComponentMethods.h"
 #import "CommonMethods.h"
+#import "FMDBOperation.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

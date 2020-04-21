@@ -131,15 +131,20 @@
     dispatch_queue_t dispatchQueue = dispatch_queue_create("SendDataAndInsertDB", nil);
     dispatch_async(dispatchQueue, ^{
         ChatRoomModel *chatRoomModel = [[ChatRoomModel alloc] init];
-        chatRoomModel.jID = [NSString stringWithFormat:@"%@",[NSDate date]] ;
+        chatRoomModel.roomID = self.addressDataModel.jID;
         if (self.addressDataModel.name) {
-            chatRoomModel.name = self.addressDataModel.name;
+            chatRoomModel.userName = self.addressDataModel.name;
         } else {
-            chatRoomModel.name = self.addressDataModel.homePhone;
+            chatRoomModel.userName = self.addressDataModel.homePhone;
         }
         if (message != nil) {
             chatRoomModel.content = message;
         }
+        chatRoomModel.currentDate = [CommonMethods setDateFormat:[NSDate date]];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            FMDBOperation *dbOperation = [FMDBOperation sharedDatabaseInstance];
+            [dbOperation insertChatMessage:chatRoomModel];
+        });
         
     });
 }

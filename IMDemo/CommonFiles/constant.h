@@ -21,7 +21,9 @@ isPhoneX = [[UIApplication sharedApplication] delegate].window.safeAreaInsets.bo
 
 #define SafeAreaBottom (Device_Is_iPhoneX ? 34.f : 0.f) //底部安全距离
 
-
+#define DATABASE_NAME @"InstanceMessage.sqlite"
+#define DOCUMENT_PATH [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject]
+#define DATABASE_PATH [DOCUMENT_PATH stringByAppendingPathComponent:DATABASE_NAME]
 
 
 
