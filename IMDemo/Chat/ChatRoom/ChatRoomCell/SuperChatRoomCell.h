@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ChatRoomDelegate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SuperChatRoomCell : UITableViewCell
+
+@property (nonatomic,weak) id<ChatRoomCellDelegate> delegate;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
 

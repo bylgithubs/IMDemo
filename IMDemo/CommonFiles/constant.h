@@ -31,4 +31,9 @@ isPhoneX = [[UIApplication sharedApplication] delegate].window.safeAreaInsets.bo
 #define DELETE_KEYBOARD_TEXT @"DeleteKeyboardText"
 #define REFRESH_CHATROOM_MESSAGE @"RefreshChatRoomMessage"
 
+
+enum MessageType{
+    Text
+};
+
 #endif /* constant_h */

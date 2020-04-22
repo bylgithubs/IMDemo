@@ -25,9 +25,9 @@
 
 - (void)longTapClick:(UILongPressGestureRecognizer *)sender{
     if (sender.state == UIGestureRecognizerStateBegan) {
-//        if ([]) {
-//            <#statements#>
-//        }
+        if ([self.delegate respondsToSelector:@selector(chatRoomTableViewCellLongPress:type:content:)]) {
+            [self.delegate chatRoomTableViewCellLongPress:self type:Text content:nil];
+        }
     }
 }
 

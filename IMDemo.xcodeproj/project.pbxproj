@@ -53,6 +53,7 @@
 		640AE9142440265E00349FBC /* SuperAddressCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SuperAddressCell.m; sourceTree = "<group>"; };
 		64321A5A24458A6D00AAED56 /* AddressSegmentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressSegmentView.h; sourceTree = "<group>"; };
 		64321A5B24458A6D00AAED56 /* AddressSegmentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressSegmentView.m; sourceTree = "<group>"; };
+		64379C2B24503E19004ACF9C /* ChatRoomDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatRoomDelegate.h; sourceTree = "<group>"; };
 		646D2C802446ED49001457C9 /* ChatRoomViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatRoomViewController.h; sourceTree = "<group>"; };
 		646D2C812446ED49001457C9 /* ChatRoomViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatRoomViewController.m; sourceTree = "<group>"; };
 		646D2C842446F608001457C9 /* ChatRoomModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatRoomModel.h; sourceTree = "<group>"; };
@@ -270,6 +271,7 @@
 				6476206424480EFD008AC38D /* SuperChatRoomCell.m */,
 				6476206624480F35008AC38D /* ChatRoomTextCell.h */,
 				6476206724480F35008AC38D /* ChatRoomTextCell.m */,
+				64379C2B24503E19004ACF9C /* ChatRoomDelegate.h */,
 			);
 			path = ChatRoomCell;
 			sourceTree = "<group>";
