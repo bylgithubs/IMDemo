@@ -31,6 +31,7 @@
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     self.packUpKeyboard = tapGesture;
     [tableView addGestureRecognizer:self.packUpKeyboard];
+    [self addNotification:YES];
 }
 
 - (void)initUI{
@@ -44,9 +45,6 @@
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20],NSForegroundColorAttributeName:[UIColor whiteColor]}];
     self.view.backgroundColor = [UIColor whiteColor];
     tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
-    //self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:(UIBarButtonItemStyleDone) target:self action:@selector(initData)];
-//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self action:@selector(initData)];
-//    self.navigationItem.leftBarButtonItem.image = [UIImage imageNamed:@"left_back.png"];
     UIView *backBtnView = [CommonComponentMethods setLeftBarItems:self];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtnView];
     tableView.delegate = self;
@@ -54,13 +52,46 @@
     [self.view addSubview:tableView];
 }
 
+- (void)initData{
+    self.dataArr = [[NSMutableArray alloc] init];
+    
+    dispatch_queue_t getChatRoomMessageQueue = dispatch_queue_create("getChatRoomMessageQueue", NULL);
+    dispatch_async(getChatRoomMessageQueue, ^{
+        self.dataArr = [[FMDBOperation sharedDatabaseInstance] getChatRoomMessage:self.addressDataModel.jID];
+        NSLog(@"============%@",self.dataArr);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+            [self scrollToTableViewBottom];
+        });
+    });
+}
+
+- (void)addNotification:(BOOL)flag{
+    if (flag) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTableView) name:REFRESH_CHATROOM_MESSAGE object:nil];
+    } else {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:REFRESH_CHATROOM_MESSAGE object:nil];
+    }
+}
+
+- (void)refreshTableView{
+    [self initData];
+    [self scrollToTableViewBottom];
+    //[tableView reloadData];
+}
+
 - (void)clickBackBtn{
     self.tabBarController.tabBar.hidden = NO;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)initData{
-    
+- (void)scrollToTableViewBottom{
+    NSInteger sectionNumber = [tableView numberOfSections];  //有多少组
+    if (sectionNumber<1) return;  //无数据时不执行 要不会crash
+    NSInteger rowNumber = [tableView numberOfRowsInSection:sectionNumber-1]; //最后一组有多少行
+    if (rowNumber<1) return;
+    NSIndexPath *index = [NSIndexPath indexPathForRow:rowNumber-1 inSection:sectionNumber-1];  //取最后一行数据
+    [tableView scrollToRowAtIndexPath:index atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -68,8 +99,8 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 50;
-    //return self.dataArr.count;
+    //return 50;
+    return self.dataArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -78,7 +109,8 @@
     if (textCell == nil) {
         textCell = [[ChatRoomTextCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-    textCell.textLabel.text = [NSString stringWithFormat:@"this is %ld row",indexPath.row];
+    ChatRoomModel *model = self.dataArr[indexPath.row];
+    textCell.textLabel.text = [NSString stringWithFormat:@"%@",model.content];
     return textCell;
 }
 
@@ -88,6 +120,14 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [self addKeyBoard];
+    [self changeTableViewHeight];
+    
+}
+
+- (void)changeTableViewHeight{
+    CGRect tableViewFrame = tableView.frame;
+    tableViewFrame.size.height = self.keyboard.frame.origin.y;
+    tableView.frame = tableViewFrame;
 }
 
 - (void)addKeyBoard{
@@ -109,6 +149,7 @@
 //    CGRect customKeyboardFrame = self.keyboard.frame;
 //    customKeyboardFrame.origin.y =
     self.keyboard.frame = keyboardFrame;
+    [self changeTableViewHeight];
 }
 
 - (void)KeyboardView:(KeyboardView *)keyboardView textFiledBegin:(UITextView *)textFiled{
@@ -121,7 +162,7 @@
         if ([CommonMethods isEmptyString:text]) {
             return;
         }
-        [[NSNotificationCenter defaultCenter] postNotificationName:DeleteKeyboardText object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:DELETE_KEYBOARD_TEXT object:nil];
         [self SendDataAndInsertDB:text];
     }
 }
@@ -144,9 +185,14 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             FMDBOperation *dbOperation = [FMDBOperation sharedDatabaseInstance];
             [dbOperation insertChatMessage:chatRoomModel];
+            [[NSNotificationCenter defaultCenter] postNotificationName:REFRESH_CHATROOM_MESSAGE object:nil];
         });
         
     });
+}
+
+- (void)dealloc{
+    [self addNotification:NO];
 }
 
 /*

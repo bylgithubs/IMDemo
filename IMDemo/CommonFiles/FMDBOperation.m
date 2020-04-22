@@ -43,11 +43,10 @@ static FMDBOperation *sharedInstance = nil;
 }
 
 - (void)initTable{
-    BOOL result = nil;
     NSString *tableName = @"ChatMessage";
     NSString *sqlStr = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@(jid integer PRIMARY KEY AUTOINCREMENT,room_ID varchar,user_name varchar,content text,current_date varchar)",tableName];
     NSLog(@"===%@",sqlStr);
-    result = [self.dbOperation executeUpdate:sqlStr];
+    BOOL result = [self.dbOperation executeUpdate:sqlStr];
     if (result) {
         NSLog(@"创建表 %@ 成功",tableName);
     } else {
@@ -55,6 +54,7 @@ static FMDBOperation *sharedInstance = nil;
     }
 }
 
+//插入聊天记录
 - (void)insertChatMessage:(ChatRoomModel *)model{
     
     [self.dbQueue inDatabase:^(FMDatabase * _Nonnull db) {
@@ -62,6 +62,25 @@ static FMDBOperation *sharedInstance = nil;
         [db executeUpdate:sqlStr,model.roomID,model.userName,model.content,model.currentDate];
     }];
     
+}
+
+//取出聊天记录
+- (NSMutableArray *)getChatRoomMessage:(NSString *)jID{
+    NSMutableArray *dataArr = [NSMutableArray array];
+    [self.dbQueue inDatabase:^(FMDatabase * _Nonnull db) {
+        NSString *sqlStr = @"select * from ChatMessage where room_ID = ?";
+        FMResultSet *resultSet = [db executeQuery:sqlStr,jID];
+        while ([resultSet next]) {
+            ChatRoomModel *model = [[ChatRoomModel alloc] init];
+            model.roomID = [resultSet stringForColumn:@"room_ID"];
+            model.userName = [resultSet stringForColumn:@"user_name"];
+            model.content = [resultSet stringForColumn:@"content"];
+            model.currentDate = [resultSet stringForColumn:@"current_date"];
+            [dataArr addObject:model];
+        }
+    }];
+    
+    return dataArr;
 }
 
 @end

@@ -20,7 +20,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) FMDatabase *dbOperation;
 @property (nonatomic,strong) FMDatabaseQueue *dbQueue;
 
+//插入聊天记录
 - (void)insertChatMessage:(ChatRoomModel *)model;
+//取出聊天记录
+- (NSMutableArray *)getChatRoomMessage:(NSString *)jID;
 
 @end
 
