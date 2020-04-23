@@ -17,13 +17,14 @@
         self.selectionStyle = UITableViewCellSelectionStyleGray;
         
         //长按事件
-        UITapGestureRecognizer *longTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(longTapClick:)];
+        UILongPressGestureRecognizer *longTap = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longTapClick:)];
         [self addGestureRecognizer:longTap];
     }
     return self;
 }
 
 - (void)longTapClick:(UILongPressGestureRecognizer *)sender{
+    NSLog(@"=========%ld",(long)sender.state);
     if (sender.state == UIGestureRecognizerStateBegan) {
         if ([self.delegate respondsToSelector:@selector(chatRoomTableViewCellLongPress:type:content:)]) {
             [self.delegate chatRoomTableViewCellLongPress:self type:Text content:nil];

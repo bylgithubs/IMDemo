@@ -111,6 +111,7 @@
     }
     textCell.delegate = self;
     ChatRoomModel *model = self.dataArr[indexPath.row];
+    textCell.chatRoomModel = model;
     textCell.textLabel.text = [NSString stringWithFormat:@"%@",model.content];
     return textCell;
 }
@@ -193,7 +194,8 @@
 }
 
 - (void)chatRoomTableViewCellLongPress:(SuperChatRoomCell *)chatRoomCell type:(enum MessageType)type content:(NSString *)content{
-    
+    NSString *roomID = chatRoomCell.chatRoomModel.roomID;
+    //chatRoomCell
 }
 
 - (void)dealloc{
