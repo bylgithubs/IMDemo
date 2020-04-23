@@ -213,8 +213,8 @@
 }
 
 - (void)deleteMessageCell{
-    NSString *messageId = self.currentCell.chatRoomModel.currentDate;
-    if ([[FMDBOperation sharedDatabaseInstance] deleteChatRoomMessage:messageId]) {
+    NSString *jid = self.currentCell.chatRoomModel.jID;
+    if ([[FMDBOperation sharedDatabaseInstance] deleteChatRoomMessage:jid]) {
         [self.dataArr removeObject:self.currentCell.chatRoomModel];
         [self reloadTableView];
     }

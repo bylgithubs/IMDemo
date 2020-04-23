@@ -72,6 +72,7 @@ static FMDBOperation *sharedInstance = nil;
         FMResultSet *resultSet = [db executeQuery:sqlStr,jID];
         while ([resultSet next]) {
             ChatRoomModel *model = [[ChatRoomModel alloc] init];
+            model.jID = [NSString stringWithFormat:@"%d",[resultSet intForColumn:@"jid"]];
             model.roomID = [resultSet stringForColumn:@"room_ID"];
             model.userName = [resultSet stringForColumn:@"user_name"];
             model.content = [resultSet stringForColumn:@"content"];
@@ -84,12 +85,11 @@ static FMDBOperation *sharedInstance = nil;
 }
 
 //删除聊天记录
-- (BOOL)deleteChatRoomMessage:(NSString *)message_id{
-    ChatRoomModel *model = [[ChatRoomModel alloc] init];
+- (BOOL)deleteChatRoomMessage:(NSString *)jid{
     @try {
         [self.dbQueue inDatabase:^(FMDatabase * _Nonnull db) {
-            NSString *sqlStr = @"delete from ChatMessage where current_date = ?";
-            [db executeUpdate:sqlStr,message_id];
+            NSString *sqlStr = @"delete from ChatMessage where jid = ?";
+            [db executeUpdate:sqlStr,jid];
         }];
         return YES;
     } @catch (NSException *exception) {
