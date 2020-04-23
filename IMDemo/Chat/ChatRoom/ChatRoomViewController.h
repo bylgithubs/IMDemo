@@ -12,6 +12,7 @@
 #import "CommonComponentMethods.h"
 #import "CommonMethods.h"
 #import "FMDBOperation.h"
+#import "ChatRoomMenuView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

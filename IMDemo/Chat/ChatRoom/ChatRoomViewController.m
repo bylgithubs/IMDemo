@@ -10,18 +10,21 @@
 #import "KeyboardView.h"
 #import "ChatRoomModel.h"
 
-@interface ChatRoomViewController ()<UITableViewDelegate,UITableViewDataSource,KeyboardViewDelegate,ChatRoomCellDelegate>
+@interface ChatRoomViewController ()<UITableViewDelegate,UITableViewDataSource,KeyboardViewDelegate,ChatRoomCellDelegate,CollectionViewDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) NSMutableArray *dataArr;
 @property (nonatomic,strong) KeyboardView *keyboard;
 @property (nonatomic,strong) UITapGestureRecognizer *packUpKeyboard;
+@property (nonatomic,strong) ChatRoomMenuView *chatRoomMenuView;
+@property (nonatomic,strong) ChatRoomTextCell *currentCell;
 
 @end
 
 @implementation ChatRoomViewController
 
 @synthesize tableView;
+@synthesize chatRoomMenuView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -109,6 +112,7 @@
     if (textCell == nil) {
         textCell = [[ChatRoomTextCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
+    self.currentCell = textCell;
     textCell.delegate = self;
     ChatRoomModel *model = self.dataArr[indexPath.row];
     textCell.chatRoomModel = model;
@@ -195,7 +199,30 @@
 
 - (void)chatRoomTableViewCellLongPress:(SuperChatRoomCell *)chatRoomCell type:(enum MessageType)type content:(NSString *)content{
     NSString *roomID = chatRoomCell.chatRoomModel.roomID;
-    //chatRoomCell
+    
+    chatRoomMenuView = [[ChatRoomMenuView alloc] initWithFrame:self.view.bounds viewController:self];
+    self.chatRoomMenuView.delegate = self;
+    
+}
+
+- (void)didSelectedItem:(NSMutableArray *)functionArr atIndexPath:(NSIndexPath *)indexPath{
+    NSString *functionName = [functionArr objectAtIndex:indexPath.row];
+    if ([functionName isEqualToString:@"删除"]) {
+        [self deleteMessageCell];
+    }
+}
+
+- (void)deleteMessageCell{
+    NSString *messageId = self.currentCell.chatRoomModel.currentDate;
+    if ([[FMDBOperation sharedDatabaseInstance] deleteChatRoomMessage:messageId]) {
+        [self.dataArr removeObject:self.currentCell.chatRoomModel];
+        [self reloadTableView];
+    }
+    
+}
+
+- (void)reloadTableView{
+    [tableView reloadData];
 }
 
 - (void)dealloc{

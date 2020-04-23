@@ -83,4 +83,18 @@ static FMDBOperation *sharedInstance = nil;
     return dataArr;
 }
 
+//删除聊天记录
+- (BOOL)deleteChatRoomMessage:(NSString *)message_id{
+    ChatRoomModel *model = [[ChatRoomModel alloc] init];
+    @try {
+        [self.dbQueue inDatabase:^(FMDatabase * _Nonnull db) {
+            NSString *sqlStr = @"delete from ChatMessage where current_date = ?";
+            [db executeUpdate:sqlStr,message_id];
+        }];
+        return YES;
+    } @catch (NSException *exception) {
+        NSLog(@"dbOperatin ERROR:%@",exception.description);
+        return NO;
+    }
+}
 @end

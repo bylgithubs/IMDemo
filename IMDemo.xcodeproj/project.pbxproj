@@ -26,6 +26,9 @@
 		6471BB2724498B480068231A /* KeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6471BB2624498B480068231A /* KeyboardView.m */; };
 		6471BB2B244996920068231A /* CustomTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6471BB2A244996920068231A /* CustomTextView.m */; };
 		6471BB2E2449A3DE0068231A /* CommonMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 6471BB2D2449A3DE0068231A /* CommonMethods.m */; };
+		64734074245122CE00540AD0 /* ChatRoomMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 64734073245122CE00540AD0 /* ChatRoomMenuView.m */; };
+		64734077245133B900540AD0 /* CollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 64734076245133B900540AD0 /* CollectionViewFlowLayout.m */; };
+		6473407A2451409F00540AD0 /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 647340792451409F00540AD0 /* CollectionViewCell.m */; };
 		6476206524480EFD008AC38D /* SuperChatRoomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6476206424480EFD008AC38D /* SuperChatRoomCell.m */; };
 		6476206824480F35008AC38D /* ChatRoomTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6476206724480F35008AC38D /* ChatRoomTextCell.m */; };
 		6476206B24484824008AC38D /* CommonComponentMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 6476206A24484824008AC38D /* CommonComponentMethods.m */; };
@@ -72,6 +75,12 @@
 		6471BB2A244996920068231A /* CustomTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomTextView.m; sourceTree = "<group>"; };
 		6471BB2C2449A3DE0068231A /* CommonMethods.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonMethods.h; sourceTree = "<group>"; };
 		6471BB2D2449A3DE0068231A /* CommonMethods.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonMethods.m; sourceTree = "<group>"; };
+		64734072245122CE00540AD0 /* ChatRoomMenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatRoomMenuView.h; sourceTree = "<group>"; };
+		64734073245122CE00540AD0 /* ChatRoomMenuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatRoomMenuView.m; sourceTree = "<group>"; };
+		64734075245133B900540AD0 /* CollectionViewFlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		64734076245133B900540AD0 /* CollectionViewFlowLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		647340782451409F00540AD0 /* CollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
+		647340792451409F00540AD0 /* CollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
 		6476206324480EFD008AC38D /* SuperChatRoomCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SuperChatRoomCell.h; sourceTree = "<group>"; };
 		6476206424480EFD008AC38D /* SuperChatRoomCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SuperChatRoomCell.m; sourceTree = "<group>"; };
 		6476206624480F35008AC38D /* ChatRoomTextCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatRoomTextCell.h; sourceTree = "<group>"; };
@@ -205,6 +214,7 @@
 		646D2C7F2446ECF8001457C9 /* ChatRoom */ = {
 			isa = PBXGroup;
 			children = (
+				647340712451226C00540AD0 /* ChatRoomMenuView */,
 				6476206224480EB3008AC38D /* ChatRoomCell */,
 				646D2C832446F59D001457C9 /* ChatRoomModel */,
 				646D2C802446ED49001457C9 /* ChatRoomViewController.h */,
@@ -262,6 +272,19 @@
 				6471BB2A244996920068231A /* CustomTextView.m */,
 			);
 			path = CustomView;
+			sourceTree = "<group>";
+		};
+		647340712451226C00540AD0 /* ChatRoomMenuView */ = {
+			isa = PBXGroup;
+			children = (
+				64734072245122CE00540AD0 /* ChatRoomMenuView.h */,
+				64734073245122CE00540AD0 /* ChatRoomMenuView.m */,
+				64734075245133B900540AD0 /* CollectionViewFlowLayout.h */,
+				64734076245133B900540AD0 /* CollectionViewFlowLayout.m */,
+				647340782451409F00540AD0 /* CollectionViewCell.h */,
+				647340792451409F00540AD0 /* CollectionViewCell.m */,
+			);
+			path = ChatRoomMenuView;
 			sourceTree = "<group>";
 		};
 		6476206224480EB3008AC38D /* ChatRoomCell */ = {
@@ -402,6 +425,7 @@
 			files = (
 				64707B5424459EEB0000CF5E /* AddressSideView.m in Sources */,
 				6471BB2E2449A3DE0068231A /* CommonMethods.m in Sources */,
+				64734074245122CE00540AD0 /* ChatRoomMenuView.m in Sources */,
 				640AE90E24401FCC00349FBC /* MainTabBarViewController.m in Sources */,
 				646D2C822446ED49001457C9 /* ChatRoomViewController.m in Sources */,
 				64321A5C24458A6D00AAED56 /* AddressSegmentView.m in Sources */,
@@ -418,6 +442,8 @@
 				6471BB2B244996920068231A /* CustomTextView.m in Sources */,
 				640AE8ED2440164C00349FBC /* AppDelegate.m in Sources */,
 				640ABDF524405A710048A44B /* AddressDataModel.m in Sources */,
+				64734077245133B900540AD0 /* CollectionViewFlowLayout.m in Sources */,
+				6473407A2451409F00540AD0 /* CollectionViewCell.m in Sources */,
 				640AE9052440184D00349FBC /* ChatRecordViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

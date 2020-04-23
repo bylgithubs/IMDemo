@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)insertChatMessage:(ChatRoomModel *)model;
 //取出聊天记录
 - (NSMutableArray *)getChatRoomMessage:(NSString *)jID;
+//删除聊天记录
+- (BOOL)deleteChatRoomMessage:(NSString *)message_id;
 
 @end
 
