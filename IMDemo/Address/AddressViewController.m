@@ -86,8 +86,8 @@
         addrCell.sideView.delegate = self;
     }
     AddressDataModel *model = self.dataArr[indexPath.row];
-    if (model.name != nil) {
-        addrCell.nameLabel.text = model.name;
+    if (model.userName != nil) {
+        addrCell.nameLabel.text = model.userName;
     } else {
         addrCell.nameLabel.text = model.homePhone;
     }
@@ -139,8 +139,8 @@
     ChatRoomViewController *chatRoomVC = [[ChatRoomViewController alloc] init];
     chatRoomVC.addressDataModel = self.addressDataModel;
     AddressDataModel *model = self.addressDataModel;
-    NSString *str = self.addressDataModel.name;
-    NSString *str1 = self.addressDataModel.jID;
+    NSString *str = self.addressDataModel.userName;
+    NSString *str1 = self.addressDataModel.userID;
     [self.navigationController pushViewController:chatRoomVC animated:YES];
 }
 
@@ -191,12 +191,12 @@
         AddressDataModel *model = [[AddressDataModel alloc] init];
         
         NSString *str = contact.identifier;
-        model.jID = contact.identifier;
+        model.userID = contact.identifier;
         NSString *givenName = contact.givenName;
         NSString *familyName = contact.familyName;
         NSLog(@"givenName=%@, familyName=%@", givenName, familyName);
         //拼接姓名
-        model.name = [NSString stringWithFormat:@"%@%@",contact.familyName,contact.givenName];
+        model.userName = [NSString stringWithFormat:@"%@%@",contact.familyName,contact.givenName];
         
         NSArray *phoneNumbers = contact.phoneNumbers;
         for (CNLabeledValue *labelValue in phoneNumbers) {
@@ -216,7 +216,7 @@
             number = [number stringByReplacingOccurrencesOfString:@" " withString:@""];
             number = [number stringByReplacingOccurrencesOfString:@" " withString:@""];
             
-            NSLog(@"姓名=%@, 电话号码是=%@", model.name, number);
+            NSLog(@"姓名=%@, 电话号码是=%@", model.userName, number);
         
             if ([phoneType containsString:@"Home"]) {
                 model.homePhone = number;

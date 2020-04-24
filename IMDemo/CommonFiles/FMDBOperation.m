@@ -70,7 +70,7 @@ static FMDBOperation *sharedInstance = nil;
     
     [self.dbQueue inDatabase:^(FMDatabase * _Nonnull db) {
         NSString *sqlStr = @"insert into ChatMessage(room_ID,user_name,content,current_date) values(?,?,?,?)";
-        [db executeUpdate:sqlStr,model.roomID,model.userName,model.content,model.currentDate];
+        [db executeUpdate:sqlStr,model.userID,model.userName,model.content,model.currentDate];
     }];
 }
 
@@ -78,27 +78,27 @@ static FMDBOperation *sharedInstance = nil;
 - (void)insertChatRecord:(ChatRecordModel *)model{
     [self.dbQueue inDatabase:^(FMDatabase * _Nonnull db) {
         NSString *sqlStr = @"select * from ChatRecord where room_ID = ?";
-        FMResultSet *resultSet = [db executeQuery:sqlStr,model.roomID];
+        FMResultSet *resultSet = [db executeQuery:sqlStr,model.userID];
         if ([resultSet next]) {
             sqlStr = @"delete from ChatRecord where room_ID = ?";
-            [db executeUpdate:sqlStr,model.roomID];
+            [db executeUpdate:sqlStr,model.userID];
         }
         [resultSet close];
         sqlStr = @"insert into ChatRecord(room_ID,user_name,content,current_date) values(?,?,?,?)";
-        [db executeUpdate:sqlStr,model.roomID,model.userName,model.content,model.currentDate];
+        [db executeUpdate:sqlStr,model.userID,model.userName,model.content,model.currentDate];
     }];
 }
 
 //取出聊天记录
-- (NSMutableArray *)getChatRoomMessage:(NSString *)jID{
+- (NSMutableArray *)getChatRoomMessage:(NSString *)userID{
     NSMutableArray *dataArr = [NSMutableArray array];
     [self.dbQueue inDatabase:^(FMDatabase * _Nonnull db) {
         NSString *sqlStr = @"select * from ChatMessage where room_ID = ?";
-        FMResultSet *resultSet = [db executeQuery:sqlStr,jID];
+        FMResultSet *resultSet = [db executeQuery:sqlStr,userID];
         while ([resultSet next]) {
             ChatRoomModel *model = [[ChatRoomModel alloc] init];
             model.jID = [NSString stringWithFormat:@"%d",[resultSet intForColumn:@"jid"]];
-            model.roomID = [resultSet stringForColumn:@"room_ID"];
+            model.userID = [resultSet stringForColumn:@"room_ID"];
             model.userName = [resultSet stringForColumn:@"user_name"];
             model.content = [resultSet stringForColumn:@"content"];
             model.currentDate = [resultSet stringForColumn:@"current_date"];
@@ -111,11 +111,11 @@ static FMDBOperation *sharedInstance = nil;
 }
 
 //删除聊天记录
-- (BOOL)deleteChatRoomMessage:(NSString *)jid{
+- (BOOL)deleteChatRoomMessage:(NSString *)jID{
     @try {
         [self.dbQueue inDatabase:^(FMDatabase * _Nonnull db) {
             NSString *sqlStr = @"delete from ChatMessage where jid = ?";
-            [db executeUpdate:sqlStr,jid];
+            [db executeUpdate:sqlStr,jID];
         }];
         return YES;
     } @catch (NSException *exception) {
@@ -134,7 +134,7 @@ static FMDBOperation *sharedInstance = nil;
         while ([resultSet next]) {
             ChatRecordModel *model = [[ChatRecordModel alloc] init];
             model.jID = [NSString stringWithFormat:@"%d",[resultSet intForColumn:@"jid"]];
-            model.roomID = [resultSet stringForColumn:@"room_ID"];
+            model.userID = [resultSet stringForColumn:@"room_ID"];
             model.userName = [resultSet stringForColumn:@"user_name"];
             model.content = [resultSet stringForColumn:@"content"];
             model.currentDate = [resultSet stringForColumn:@"current_date"];

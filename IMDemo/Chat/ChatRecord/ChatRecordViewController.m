@@ -84,8 +84,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     ChatRoomViewController *chatRoomVC = [[ChatRoomViewController alloc] init];
     ChatRecordModel *model = self.dataArr[indexPath.row];
-    chatRoomVC.addressDataModel.jID = model.roomID;
-    
+    AddressDataModel *addrModel = [[AddressDataModel alloc] init];
+    addrModel.userID = model.userID;
+    addrModel.userName = model.userName;
+    chatRoomVC.addressDataModel = addrModel;
+
     [self.navigationController pushViewController:chatRoomVC animated:YES];
 }
 

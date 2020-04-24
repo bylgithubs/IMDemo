@@ -12,8 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface AddressDataModel : NSObject
 
-@property (nonatomic,copy) NSString *jID;
-@property (nonatomic,copy) NSString *name;
+@property (nonatomic,copy) NSString *userID;
+@property (nonatomic,copy) NSString *userName;
 @property (nonatomic,copy) NSString *homePhone;
 @property (nonatomic,copy) NSString *workPhone;
 @property (nonatomic,copy) NSString *iPhonePhone;

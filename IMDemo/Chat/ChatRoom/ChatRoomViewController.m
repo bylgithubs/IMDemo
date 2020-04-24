@@ -40,8 +40,8 @@
 
 - (void)initUI{
     self.tabBarController.tabBar.hidden = YES;
-    if (self.addressDataModel.name!=nil) {
-        [self.navigationItem setTitle:self.addressDataModel.name];
+    if (self.addressDataModel.userName!=nil) {
+        [self.navigationItem setTitle:self.addressDataModel.userName];
     } else {
         [self.navigationItem setTitle:self.addressDataModel.homePhone];
     }
@@ -61,7 +61,8 @@
     
     dispatch_queue_t getChatRoomMessageQueue = dispatch_queue_create("getChatRoomMessageQueue", NULL);
     dispatch_async(getChatRoomMessageQueue, ^{
-        self.dataArr = [[FMDBOperation sharedDatabaseInstance] getChatRoomMessage:self.addressDataModel.jID];
+        self.dataArr = [[FMDBOperation sharedDatabaseInstance] getChatRoomMessage:self.addressDataModel.userID];
+        NSLog(@"============%@",[NSThread currentThread]);
         NSLog(@"============%@",self.dataArr);
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
@@ -179,11 +180,11 @@
     dispatch_async(dispatchQueue, ^{
         ChatRoomModel *chatRoomModel = [[ChatRoomModel alloc] init];
         ChatRecordModel *chatRecordModel = [[ChatRecordModel alloc] init];
-        chatRoomModel.roomID = self.addressDataModel.jID;
-        chatRecordModel.roomID = self.addressDataModel.jID;
-        if (self.addressDataModel.name) {
-            chatRoomModel.userName = self.addressDataModel.name;
-            chatRecordModel.userName = self.addressDataModel.name;
+        chatRoomModel.userID = self.addressDataModel.userID;
+        chatRecordModel.userID = self.addressDataModel.userID;
+        if (self.addressDataModel.userName) {
+            chatRoomModel.userName = self.addressDataModel.userName;
+            chatRecordModel.userName = self.addressDataModel.userName;
         } else {
             chatRoomModel.userName = self.addressDataModel.homePhone;
             chatRecordModel.userName = self.addressDataModel.homePhone;
@@ -206,7 +207,7 @@
 }
 
 - (void)chatRoomTableViewCellLongPress:(SuperChatRoomCell *)chatRoomCell type:(enum MessageType)type content:(NSString *)content{
-    NSString *roomID = chatRoomCell.chatRoomModel.roomID;
+    NSString *roomID = chatRoomCell.chatRoomModel.userID;
     self.currentCell = chatRoomCell;
     chatRoomMenuView = [[ChatRoomMenuView alloc] initWithFrame:self.view.bounds viewController:self];
     self.chatRoomMenuView.delegate = self;
