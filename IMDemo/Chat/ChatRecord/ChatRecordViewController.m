@@ -75,17 +75,22 @@
     if (chatRecordCell ==nil) {
         chatRecordCell = [[ChatRecordCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-    chatRecordCell.chatRecordModel = self.dataArr[indexPath.row];
-    chatRecordCell.textLabel.text = chatRecordCell.chatRecordModel.content;
+    ChatRecordModel *model = self.dataArr[indexPath.row];
+    chatRecordCell.chatRecordModel = model;
+    [chatRecordCell configData];
     return chatRecordCell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    ChatRoomViewController *chatRoomVC = [[ChatRoomViewController alloc] init];
+    ChatRecordModel *model = self.dataArr[indexPath.row];
+    chatRoomVC.addressDataModel.jID = model.roomID;
     
+    [self.navigationController pushViewController:chatRoomVC animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 80;
+    return 60;
 }
 
 - (void)dealloc{
