@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ChatRecordCell.h"
+#import "FMDBOperation.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ChatRecordViewController : UIViewController
+
+@property (nonatomic,strong) NSMutableArray *dataArr;
 
 @end
 

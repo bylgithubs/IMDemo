@@ -23,7 +23,7 @@ static FMDBOperation *sharedInstance = nil;
 
 - (FMDatabaseQueue *)dbQueue{
     if (!_dbQueue) {
-        self.dbQueue = [FMDatabaseQueue databaseQueueWithPath:DATABASE_PATH];
+        _dbQueue = [FMDatabaseQueue databaseQueueWithPath:DATABASE_PATH];
     }
     return _dbQueue;
 }
@@ -52,6 +52,17 @@ static FMDBOperation *sharedInstance = nil;
     } else {
         NSLog(@"创建表 %@ 失败",tableName);
     }
+    
+    tableName = @"ChatRecord";
+    sqlStr = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@(jid integer PRIMARY KEY AUTOINCREMENT,room_ID varchar,user_name varchar,content text,current_date varchar)",tableName];
+    NSLog(@"===%@",sqlStr);
+    result = [self.dbOperation executeUpdate:sqlStr];
+    if (result) {
+        NSLog(@"创建表 %@ 成功",tableName);
+    } else {
+        NSLog(@"创建表 %@ 失败",tableName);
+    }
+    
 }
 
 //插入聊天记录
@@ -61,7 +72,21 @@ static FMDBOperation *sharedInstance = nil;
         NSString *sqlStr = @"insert into ChatMessage(room_ID,user_name,content,current_date) values(?,?,?,?)";
         [db executeUpdate:sqlStr,model.roomID,model.userName,model.content,model.currentDate];
     }];
-    
+}
+
+//插入最新聊天记录
+- (void)insertChatRecord:(ChatRecordModel *)model{
+    [self.dbQueue inDatabase:^(FMDatabase * _Nonnull db) {
+        NSString *sqlStr = @"select * from ChatRecord where room_ID = ?";
+        FMResultSet *resultSet = [db executeQuery:sqlStr,model.roomID];
+        if ([resultSet next]) {
+            sqlStr = @"delete from ChatRecord where room_ID = ?";
+            [db executeUpdate:sqlStr,model.roomID];
+        }
+        [resultSet close];
+        sqlStr = @"insert into ChatRecord(room_ID,user_name,content,current_date) values(?,?,?,?)";
+        [db executeUpdate:sqlStr,model.roomID,model.userName,model.content,model.currentDate];
+    }];
 }
 
 //取出聊天记录
@@ -79,6 +104,7 @@ static FMDBOperation *sharedInstance = nil;
             model.currentDate = [resultSet stringForColumn:@"current_date"];
             [dataArr addObject:model];
         }
+        [resultSet close];
     }];
     
     return dataArr;
@@ -97,4 +123,26 @@ static FMDBOperation *sharedInstance = nil;
         return NO;
     }
 }
+
+
+//查询最新聊天消息
+- (NSMutableArray *)getChatRecordData{
+    NSMutableArray *dataArr = [NSMutableArray array];
+    [self.dbQueue inDatabase:^(FMDatabase * _Nonnull db) {
+        NSString *sqlStr = @"select * from ChatRecord order by jid desc";
+        FMResultSet *resultSet = [db executeQuery:sqlStr];
+        while ([resultSet next]) {
+            ChatRecordModel *model = [[ChatRecordModel alloc] init];
+            model.jID = [NSString stringWithFormat:@"%d",[resultSet intForColumn:@"jid"]];
+            model.roomID = [resultSet stringForColumn:@"room_ID"];
+            model.userName = [resultSet stringForColumn:@"user_name"];
+            model.content = [resultSet stringForColumn:@"content"];
+            model.currentDate = [resultSet stringForColumn:@"current_date"];
+            [dataArr addObject:model];
+        }
+        [resultSet close];
+    }];
+    return dataArr;
+}
+
 @end

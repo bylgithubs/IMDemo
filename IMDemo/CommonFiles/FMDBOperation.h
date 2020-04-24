@@ -10,6 +10,7 @@
 #import <FMDatabase.h>
 #import <FMDatabaseQueue.h>
 #import "ChatRoomModel.h"
+#import "ChatRecordModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -26,6 +27,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSMutableArray *)getChatRoomMessage:(NSString *)jID;
 //删除聊天记录
 - (BOOL)deleteChatRoomMessage:(NSString *)jid;
+//插入最新聊天记录
+- (void)insertChatRecord:(ChatRecordModel *)model;
+//查询最新聊天消息
+- (NSMutableArray *)getChatRecordData;
 
 @end
 

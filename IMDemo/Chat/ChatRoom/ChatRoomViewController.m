@@ -9,6 +9,7 @@
 #import "ChatRoomViewController.h"
 #import "KeyboardView.h"
 #import "ChatRoomModel.h"
+#import "ChatRecordModel.h"
 
 @interface ChatRoomViewController ()<UITableViewDelegate,UITableViewDataSource,KeyboardViewDelegate,ChatRoomCellDelegate,CollectionViewDelegate>
 
@@ -177,20 +178,28 @@
     dispatch_queue_t dispatchQueue = dispatch_queue_create("SendDataAndInsertDB", nil);
     dispatch_async(dispatchQueue, ^{
         ChatRoomModel *chatRoomModel = [[ChatRoomModel alloc] init];
+        ChatRecordModel *chatRecordModel = [[ChatRecordModel alloc] init];
         chatRoomModel.roomID = self.addressDataModel.jID;
+        chatRecordModel.roomID = self.addressDataModel.jID;
         if (self.addressDataModel.name) {
             chatRoomModel.userName = self.addressDataModel.name;
+            chatRecordModel.userName = self.addressDataModel.name;
         } else {
             chatRoomModel.userName = self.addressDataModel.homePhone;
+            chatRecordModel.userName = self.addressDataModel.homePhone;
         }
         if (message != nil) {
             chatRoomModel.content = message;
+            chatRecordModel.content = message;
         }
         chatRoomModel.currentDate = [CommonMethods setDateFormat:[NSDate date]];
+        chatRecordModel.currentDate = [CommonMethods setDateFormat:[NSDate date]];
         dispatch_async(dispatch_get_main_queue(), ^{
             FMDBOperation *dbOperation = [FMDBOperation sharedDatabaseInstance];
             [dbOperation insertChatMessage:chatRoomModel];
+            [dbOperation insertChatRecord:chatRecordModel];
             [[NSNotificationCenter defaultCenter] postNotificationName:REFRESH_CHATROOM_MESSAGE object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:UPDATE_CHAT_RECORD object:nil];
         });
         
     });

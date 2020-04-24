@@ -8,15 +8,88 @@
 
 #import "ChatRecordViewController.h"
 
-@interface ChatRecordViewController ()
+@interface ChatRecordViewController ()<UITableViewDelegate,UITableViewDataSource>
+
+@property (nonatomic,strong) UITableView *tableView;
 
 @end
 
 @implementation ChatRecordViewController
+@synthesize tableView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self initUI];
+    [self initData];
+    [self notificationRegister:YES];
+}
+
+- (void)initUI{
+    tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
+    tableView.backgroundColor = [UIColor whiteColor];
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    [self.view addSubview:tableView];
+}
+
+- (void)initData{
+    dispatch_queue_t chatRecordQueue = dispatch_queue_create("ChatRecordQueue", NULL);
+    dispatch_async(chatRecordQueue, ^{
+        [self getDataFromDB];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    });
+}
+
+- (void)notificationRegister:(BOOL)flag{
+    if (flag) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadChatRecordData) name:UPDATE_CHAT_RECORD object:nil];
+    } else {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UPDATE_CHAT_RECORD object:nil];
+    }
+}
+
+- (void)reloadChatRecordData{
+    [self initData];
+    //[tableView reloadData];
+}
+
+- (void)getDataFromDB{
+    self.dataArr = [[FMDBOperation sharedDatabaseInstance] getChatRecordData];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.dataArr.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *cellIdentifier = @"ChatRecordCell";
+    ChatRecordCell *chatRecordCell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (chatRecordCell ==nil) {
+        chatRecordCell = [[ChatRecordCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    chatRecordCell.chatRecordModel = self.dataArr[indexPath.row];
+    chatRecordCell.textLabel.text = chatRecordCell.chatRecordModel.content;
+    return chatRecordCell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 80;
+}
+
+- (void)dealloc{
+    [self notificationRegister:NO];
 }
 
 /*
