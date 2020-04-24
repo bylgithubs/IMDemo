@@ -141,6 +141,7 @@
     if ([self.delegate respondsToSelector:@selector(didSelectedItem:atIndexPath:)]) {
         [self.delegate didSelectedItem:_functionTextArr atIndexPath:indexPath];
     }
+    [self exitClick];
 }
 
 //避免手势冲突，使didSelectItemAtIndexPath方法无效

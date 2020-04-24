@@ -17,7 +17,7 @@
 @property (nonatomic,strong) KeyboardView *keyboard;
 @property (nonatomic,strong) UITapGestureRecognizer *packUpKeyboard;
 @property (nonatomic,strong) ChatRoomMenuView *chatRoomMenuView;
-@property (nonatomic,strong) ChatRoomTextCell *currentCell;
+@property (nonatomic,strong) SuperChatRoomCell *currentCell;
 
 @end
 
@@ -112,7 +112,6 @@
     if (textCell == nil) {
         textCell = [[ChatRoomTextCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-    self.currentCell = textCell;
     textCell.delegate = self;
     ChatRoomModel *model = self.dataArr[indexPath.row];
     textCell.chatRoomModel = model;
@@ -199,7 +198,7 @@
 
 - (void)chatRoomTableViewCellLongPress:(SuperChatRoomCell *)chatRoomCell type:(enum MessageType)type content:(NSString *)content{
     NSString *roomID = chatRoomCell.chatRoomModel.roomID;
-    
+    self.currentCell = chatRoomCell;
     chatRoomMenuView = [[ChatRoomMenuView alloc] initWithFrame:self.view.bounds viewController:self];
     self.chatRoomMenuView.delegate = self;
     
