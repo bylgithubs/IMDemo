@@ -136,12 +136,17 @@
 }
 
 - (void)sideViewClick:(NSInteger)btnTag{
-    ChatRoomViewController *chatRoomVC = [[ChatRoomViewController alloc] init];
-    chatRoomVC.addressDataModel = self.addressDataModel;
-    AddressDataModel *model = self.addressDataModel;
-    NSString *str = self.addressDataModel.userName;
-    NSString *str1 = self.addressDataModel.userID;
-    [self.navigationController pushViewController:chatRoomVC animated:YES];
+    if (btnTag == 1) {
+        ChatRoomViewController *chatRoomVC = [[ChatRoomViewController alloc] init];
+        chatRoomVC.addressDataModel = self.addressDataModel;
+        AddressDataModel *model = self.addressDataModel;
+        NSString *str = self.addressDataModel.userName;
+        NSString *str1 = self.addressDataModel.userID;
+        [self.navigationController pushViewController:chatRoomVC animated:YES];
+    } else {
+        
+    }
+    
 }
 
 //请求通讯录权限

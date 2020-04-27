@@ -47,7 +47,7 @@
 }
 
 - (void)setUI{
-    self.tabBar.barTintColor = [UIColor purpleColor];
+    self.tabBar.barTintColor = [UIColor colorWithRed:0 green:1 blue:1 alpha:0.8];
     addrNC.navigationBar.barTintColor = [UIColor blueColor];
     chatNC.navigationBar.barTintColor = [UIColor blueColor];
     [addrVC setTitle:@"通讯录"];

@@ -145,4 +145,18 @@ static FMDBOperation *sharedInstance = nil;
     return dataArr;
 }
 
+//删除最新聊天记录
+- (BOOL)deleteChatRecordMessage:(NSString *)jID{
+    @try {
+        [self.dbQueue inDatabase:^(FMDatabase * _Nonnull db) {
+            NSString *sqlStr = @"delete from ChatRecord where jid = ?";
+            [db executeUpdate:sqlStr,jID];
+        }];
+        return YES;
+    } @catch (NSException *exception) {
+        NSLog(@"dbOperatin ERROR:%@",exception.description);
+        return NO;
+    }
+}
+
 @end

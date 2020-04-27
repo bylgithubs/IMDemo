@@ -92,6 +92,42 @@
     [self.navigationController pushViewController:chatRoomVC animated:YES];
 }
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        BOOL result = [self deleteChatRecord:indexPath];
+        if (result) {
+            NSLog(@"删除成功");
+        } else {
+            NSLog(@"删除失败");
+        }
+    }
+}
+
+
+
+//- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    return UITableViewCellEditingStyleDelete;
+//}
+
+//修改Delete按钮wei"删除"
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return @"删除";
+}
+
+//删除一条最新聊天记录
+- (BOOL)deleteChatRecord:(NSIndexPath *)indexPath{
+    FMDBOperation *db = [FMDBOperation sharedDatabaseInstance];
+    ChatRecordModel *model = self.dataArr[indexPath.row];
+    BOOL result = [db deleteChatRecordMessage:model.jID];
+    if (result) {
+        [self.dataArr removeObjectAtIndex:indexPath.row];
+        [tableView beginUpdates];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [tableView endUpdates];
+    }
+    return YES;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 60;
 }
