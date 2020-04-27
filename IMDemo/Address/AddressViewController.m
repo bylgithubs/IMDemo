@@ -144,9 +144,10 @@
         NSString *str1 = self.addressDataModel.userID;
         [self.navigationController pushViewController:chatRoomVC animated:YES];
     } else {
-        
+        DetailInformationViewController *detailInfoVC = [[DetailInformationViewController alloc] init];
+        detailInfoVC.detailInfoModel = self.addressDataModel;
+        [self.navigationController pushViewController:detailInfoVC animated:YES];
     }
-    
 }
 
 //请求通讯录权限
