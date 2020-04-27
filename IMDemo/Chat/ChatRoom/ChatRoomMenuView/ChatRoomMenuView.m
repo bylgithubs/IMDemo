@@ -56,7 +56,7 @@
     [self addGestureRecognizer:gesture];
     
     self.functionView = [[UIView alloc] init];
-    CGFloat height = 60 + SafeAreaBottom;
+    CGFloat height = 80 + SafeAreaBottom;
     self.functionView.frame = CGRectMake(0, vc.view.bounds.size.height - height, SCREEN_WIDTH, height);
     self.functionView.backgroundColor = [UIColor whiteColor];
     [self addSubview:self.functionView];

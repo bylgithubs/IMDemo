@@ -211,7 +211,9 @@
     self.currentCell = chatRoomCell;
     chatRoomMenuView = [[ChatRoomMenuView alloc] initWithFrame:self.view.bounds viewController:self];
     self.chatRoomMenuView.delegate = self;
-    
+    //长按后调整键盘和tableView高度
+    [self dismissKeyboard];
+    [self changeTableViewHeight];
 }
 
 - (void)didSelectedItem:(NSMutableArray *)functionArr atIndexPath:(NSIndexPath *)indexPath{

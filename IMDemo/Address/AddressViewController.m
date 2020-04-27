@@ -58,7 +58,7 @@
 
 - (void)initData{
     //获取通讯录数据
-    [self requestContactAuthorAfterSystemVersion9];
+    [self requestContactData];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -139,9 +139,6 @@
     if (btnTag == 1) {
         ChatRoomViewController *chatRoomVC = [[ChatRoomViewController alloc] init];
         chatRoomVC.addressDataModel = self.addressDataModel;
-        AddressDataModel *model = self.addressDataModel;
-        NSString *str = self.addressDataModel.userName;
-        NSString *str1 = self.addressDataModel.userID;
         [self.navigationController pushViewController:chatRoomVC animated:YES];
     } else {
         DetailInformationViewController *detailInfoVC = [[DetailInformationViewController alloc] init];
@@ -152,7 +149,7 @@
 
 //请求通讯录权限
 #pragma mark 请求通讯录权限
-- (void)requestContactAuthorAfterSystemVersion9{
+- (void)requestContactData{
     
     CNAuthorizationStatus status = [CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts];
     if (status == CNAuthorizationStatusNotDetermined) {
@@ -257,7 +254,7 @@
     
     UIAlertController *alertController = [UIAlertController
                                           alertControllerWithTitle:@"请授权通讯录权限"
-                                          message:@"请在iPhone的\"设置-隐私-通讯录\"选项中,允许花解解访问你的通讯录"
+                                          message:@"请在iPhone的\"设置-隐私-通讯录\"选项中,允许App访问你的通讯录"
                                           preferredStyle: UIAlertControllerStyleAlert];
     
     UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:nil];

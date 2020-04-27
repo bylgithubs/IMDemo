@@ -11,7 +11,6 @@
 @interface DetailInformationViewController ()
 
 @property (nonatomic,strong) UITableView *tableView;
-//@property (nonatomic,strong) NSMutableArray *dataArr;
 @property (nonatomic,strong) UILabel *userNameLabel;
 @property (nonatomic,strong) UILabel *userNameText;
 @property (nonatomic,strong) UILabel *homePhoneLabel;
@@ -24,8 +23,8 @@
 @property (nonatomic,strong) UILabel *mobilePhoneText;
 @property (nonatomic,strong) UILabel *mainPhoneLabel;
 @property (nonatomic,strong) UILabel *mainPhoneText;
-@property (nonatomic,strong) UILabel *remarkLabel;
-@property (nonatomic,strong) UILabel *remarkText;
+//@property (nonatomic,strong) UILabel *remarkLabel;
+//@property (nonatomic,strong) UILabel *remarkText;
 
 @property (nonatomic,assign) CGFloat orignX;
 @property (nonatomic,assign) CGFloat width;
@@ -44,15 +43,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     orignX = 30;
     width = 70;
     height = 30;
     len = 10;
     [self initUI];
     [self initData];
-//    tableView.delegate = self;
-//    tableView.dataSource = self;
-//    [self.view addSubview:tableView];
+
 }
 
 - (void)initUI{
@@ -69,8 +67,8 @@
     self.mobilePhoneText = [[UILabel alloc] init];
     self.mainPhoneLabel = [[UILabel alloc] init];
     self.mainPhoneText = [[UILabel alloc] init];
-    self.remarkLabel = [[UILabel alloc] init];
-    self.remarkText = [[UILabel alloc] init];
+//    self.remarkLabel = [[UILabel alloc] init];
+//    self.remarkText = [[UILabel alloc] init];
     
     [self.view addSubview:self.userNameLabel];
     [self.view addSubview:self.userNameText];
@@ -84,8 +82,8 @@
     [self.view addSubview:self.mobilePhoneText];
     [self.view addSubview:self.mainPhoneLabel];
     [self.view addSubview:self.mainPhoneText];
-    [self.view addSubview:self.remarkLabel];
-    [self.view addSubview:self.remarkText];
+//    [self.view addSubview:self.remarkLabel];
+//    [self.view addSubview:self.remarkText];
     
     CGFloat h = SCREEN_HEIGHT;
     [self.userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -166,18 +164,18 @@
         make.height.mas_equalTo(height);
     }];
     
-    [self.remarkLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.mainPhoneText.mas_bottom).mas_offset(len);
-        make.left.mas_equalTo(self.view.mas_left).mas_offset(orignX);
-        make.width.mas_equalTo(width);
-        make.height.mas_equalTo(height);
-    }];
-    [self.remarkText mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.remarkLabel.mas_bottom).mas_offset(len);
-        make.left.mas_equalTo(self.view.mas_left).mas_offset(orignX);
-        make.width.mas_equalTo(width*3);
-        make.height.mas_equalTo(height*3);
-    }];
+//    [self.remarkLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(self.mainPhoneText.mas_bottom).mas_offset(len);
+//        make.left.mas_equalTo(self.view.mas_left).mas_offset(orignX);
+//        make.width.mas_equalTo(width);
+//        make.height.mas_equalTo(height);
+//    }];
+//    [self.remarkText mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(self.remarkLabel.mas_bottom).mas_offset(len);
+//        make.left.mas_equalTo(self.view.mas_left).mas_offset(orignX);
+//        make.width.mas_equalTo(width*3);
+//        make.height.mas_equalTo(height*3);
+//    }];
 
 }
 
@@ -201,34 +199,11 @@
     [self.mainPhoneLabel setText:@"主要:"];
     [self.mainPhoneText setText:self.detailInfoModel.mainPhone];
     
-    [self.remarkLabel setText:@"备注:"];
-    self.remarkText.textAlignment = NSTextAlignmentLeft;
-    [self.remarkText setText:self.detailInfoModel.remark];
+//    [self.remarkLabel setText:@"备注:"];
+//    self.remarkText.textAlignment = NSTextAlignmentLeft;
+//    [self.remarkText setText:self.detailInfoModel.remark];
 }
 
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-//    return 7;
-//}
-//
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-//    return 1;
-//}
-//
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    static NSString *identifier = @"DetailInformationCell";
-//    DetailInformationCell *detailInfoCell = [tableView dequeueReusableCellWithIdentifier:identifier];
-//    if (detailInfoCell == nil) {
-//        detailInfoCell = [[DetailInformationCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-//    }
-//    detailInfoCell.detailInfoCellModel = self.detailInfoModel;
-//    [detailInfoCell configData];
-//    
-//    return detailInfoCell;
-//}
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    return 45;
-//}
 /*
 #pragma mark - Navigation
 

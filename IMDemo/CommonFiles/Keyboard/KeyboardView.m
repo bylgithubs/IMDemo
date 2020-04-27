@@ -112,29 +112,10 @@ static KeyboardView *sharedInstance = nil;
     
     customKeyboardFrame.origin.y = keyboardRect.origin.y - self.toolFrame.size.height - 44 - 10;
     customKeyboardFrame.size.height = keyboardRect.size.height + self.toolFrame.size.height;
-//    if (keyboardRect.origin.y < self.toolView.frame.origin.y) {
-//        customKeyboardFrame.origin.y = keyboardRect.origin.y - self.toolFrame.size.height;
-//        customKeyboardFrame.size.height = keyboardRect.size.height + self.toolFrame.size.height;
-//    } else {
-//        customKeyboardFrame.origin.y = SCREEN_HEIGHT- 44 -SafeAreaBottom;
-//        customKeyboardFrame.size.height = self.toolView.frame.size.height;
-//    }
     
-    //keyboardHeight = self.toolView.frame.size.height;
-//    CGRect toolFrame = self.toolView.frame;
-//    if (keyboardRect.size.height > self.toolView.frame.size.height) {
-//        toolFrame.origin.y = keyboardRect.origin.y - self.toolView.frame.size.height;
-//        
-//    } else {
-//        toolFrame.origin.y = 0;
-//    }
-//    self.toolView.frame = toolFrame;
     if ([self.delegate respondsToSelector:@selector(KeyBoardViewHeightChange:)]) {
         [self.delegate KeyBoardViewHeightChange:customKeyboardFrame];
     }
-    //mkeyboardFrame.origin.y = keyboardFrame.origin.y - keyboardRect.size.height;
-    //keyboardFrame.size.height = keyboardRect.size.height + keyboardHeight;
-    //self.toolView.frame = keyboardFrame;
 }
 
 - (void)resignKeyboard{
