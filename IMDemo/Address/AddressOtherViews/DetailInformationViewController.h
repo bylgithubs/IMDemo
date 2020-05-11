@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AddressDataModel.h"
 #import <Masonry.h>
+#import "CommonComponentMethods.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

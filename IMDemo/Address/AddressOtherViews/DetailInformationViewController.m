@@ -54,6 +54,12 @@
 }
 
 - (void)initUI{
+    
+    self.tabBarController.tabBar.hidden = YES;
+    UIView *backBtnView = [CommonComponentMethods setLeftBarItems:self];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtnView];
+    [self setTitle:@"详细信息"];
+    
     self.view.backgroundColor = [UIColor whiteColor];
     self.userNameLabel = [[UILabel alloc] init];
     self.userNameText = [[UILabel alloc] init];
@@ -204,6 +210,10 @@
 //    [self.remarkText setText:self.detailInfoModel.remark];
 }
 
+- (void)clickBackBtn{
+    self.tabBarController.tabBar.hidden = NO;
+    [self.navigationController popViewControllerAnimated:YES];
+}
 /*
 #pragma mark - Navigation
 
